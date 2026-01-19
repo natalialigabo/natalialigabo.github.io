@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athena Venture Builder | Engenharia de Software</title>
+    <title>Natalia Ligabo | Engenharia de Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CONFIGURAÇÕES GERAIS --- */
+        /* --- CONFIGURAÇÕES VISUAIS --- */
         :root {
-            --bg-color: #0f1115;
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            --accent: #d4b2d8; /* Lilás Athena */
-            --accent-glow: rgba(212, 178, 216, 0.15);
-            --card-bg: #161b22;
-            --border: #333;
+            --bg-color: #0f1115;      /* Fundo base escuro */
+            --text-main: #ffffff;     /* Texto claro */
+            --text-muted: #9ca3af;    /* Texto cinza */
+            --accent: #d4b2d8;        /* Roxo Suave (Sua marca) */
+            --accent-glow: rgba(212, 178, 216, 0.15); /* Brilho do roxo */
+            --card-bg: #161b22;       /* Fundo dos cards */
+            --border: #333;           /* Bordas sutis */
         }
 
+        /* Modo Claro (Opcional - só ativa se clicar no botão) */
         body.light-mode {
             --bg-color: #f9fafb;
             --text-main: #111827;
             --text-muted: #4b5563;
-            --accent: #7e22ce; /* Roxo forte */
+            --accent: #7e22ce;
             --accent-glow: rgba(126, 34, 206, 0.1);
             --card-bg: #ffffff;
             --border: #e5e7eb;
@@ -33,7 +34,7 @@
         
         body {
             background-color: var(--bg-color);
-            /* Fundo Premium com Gradiente */
+            /* O FUNDO PREMIUM (Gradiente Escuro) */
             background-image: radial-gradient(circle at 50% 0%, #1c2029 0%, var(--bg-color) 80%);
             background-attachment: fixed;
             color: var(--text-main);
@@ -62,19 +63,18 @@
         }
         .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
-        /* --- ANIMAÇÃO REVEAL --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (TOPO) --- */
         header {
             min-height: 85vh;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding-top: 60px;
+            flex-wrap: wrap-reverse; /* Melhora celular */
         }
 
+        .hero-text { flex: 1; min-width: 300px; }
+        
         .hero-text h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3.8rem;
@@ -82,13 +82,10 @@
             margin-bottom: 20px;
         }
         
-        .hero-text .brand-name {
-            color: var(--accent);
-            display: block;
-        }
+        .hero-text .highlight { color: var(--accent); }
 
         .hero-text .subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             color: var(--text-muted);
@@ -97,38 +94,29 @@
             font-weight: 600;
         }
 
-        .hero-image { position: relative; }
+        .hero-image { flex: 1; display: flex; justify-content: center; min-width: 300px; }
         .hero-image img {
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%; /* Redondo */
             object-fit: cover;
             border: 1px solid var(--border);
+            /* O Brilho Roxo ao redor da foto */
             box-shadow: 0 0 60px var(--accent-glow);
-        }
-        .founder-badge {
-            position: absolute;
-            bottom: 0;
-            right: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--accent);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: bold;
+            animation: float 6s ease-in-out infinite;
         }
 
-        /* --- SEÇÃO SOBRE (VENTURE BUILDER) --- */
-        .about-section {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-            margin-bottom: 60px;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
+
+        /* --- SOBRE (RESUMO PROFISSIONAL) --- */
+        .about-section { padding: 80px 0; border-top: 1px solid var(--border); margin-bottom: 60px; }
         .about-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--text-main); margin-bottom: 30px;}
-        .highlight { color: var(--accent); }
 
-        /* --- SEÇÃO SERVIÇOS (NOVO) --- */
+        /* --- MEUS SERVIÇOS (COMO POSSO AJUDAR) --- */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -201,33 +189,33 @@
             color: var(--text-muted);
         }
 
-        /* --- DIFERENCIAIS (WHY US) --- */
-        .why-us {
-            text-align: center;
-            padding: 60px 0;
-            background: var(--accent-glow);
-            border-radius: 16px;
-            margin-bottom: 60px;
-        }
-        .why-grid {
+        /* --- OPEN SOURCE LIST --- */
+        .opensource-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-            padding: 0 20px;
+            gap: 20px;
         }
-        .why-item h4 { color: var(--accent); margin-bottom: 10px; }
-        .why-item p { font-size: 0.9rem; color: var(--text-muted); }
+        .os-card {
+            background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border);
+        }
+        .os-card h4 { margin-bottom: 5px; color: var(--text-main); }
+        .os-card span { font-size: 0.8rem; color: var(--accent); }
+        .os-card p { font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; }
+
 
         /* --- FOOTER --- */
         footer { padding: 50px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); }
         .social-links a { color: var(--text-main); margin: 0 15px; font-size: 1.5rem; transition: color 0.3s; }
         .social-links a:hover { color: var(--accent); }
 
+        /* Animação de entrada */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
         @media (max-width: 768px) {
-            header { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
+            header { text-align: center; padding-top: 40px; }
             .hero-text h1 { font-size: 2.8rem; }
-            .hero-image img { width: 200px; height: 200px; margin-bottom: 30px; }
+            .hero-image img { width: 250px; height: 250px; margin-bottom: 30px; }
         }
     </style>
 </head>
@@ -239,115 +227,127 @@
         
         <header>
             <div class="hero-text reveal">
-                <span class="subtitle">Engenharia de Software & Soluções</span>
+                <span class="subtitle">Biomedical Scientist & Dev</span>
                 <h1>
-                    <span class="brand-name">Athena</span>
-                    Venture Builder
+                    Natalia <span class="highlight">Ligabo</span>
                 </h1>
-                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 500px;">
-                    Transformamos dados brutos e processos manuais em sistemas digitais de alta performance.
+                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 500px; margin-top: 20px;">
+                    Unindo neurociência e código. Transformo dados clínicos em soluções de software de alto impacto (HealthTech) e segurança.
                 </p>
+                <div style="margin-top: 30px;">
+                    <a href="#contato" style="background: var(--accent); color: #000; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block;">Vamos conversar?</a>
+                </div>
             </div>
             <div class="hero-image reveal">
                 <img src="avatar.jpeg" alt="Natalia Ligabo">
-                <div class="founder-badge">By Natalia Ligabo</div>
             </div>
         </header>
 
         <section class="about-section reveal">
-            <h2 class="about-title">Nós Construímos o <span class="highlight">Futuro</span> do Seu Negócio.</h2>
-            <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 20px;">
-                A Athena atua como sua parceira estratégica de tecnologia. Operamos no modelo de <strong>"Venture Builder"</strong>: somos especialistas em pegar ideias complexas ou operações desorganizadas e transformá-las em produtos digitais escaláveis.
-            </p>
-            <p style="font-size: 1.1rem; color: var(--text-muted);">
-                Unimos o rigor da <strong>Engenharia de Computação e Biomédica</strong> com a agilidade de negócios. Não entregamos apenas linhas de código; entregamos ferramentas estratégicas projetadas para resolver dores reais e acelerar o crescimento da sua empresa.
-            </p>
+            <h2 class="about-title">Como posso <span class="highlight">ajudar</span> seu projeto?</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Engenharia de Software</h3>
+                    <p>Desenvolvimento Full Stack (Python, Java) focado em arquiteturas seguras e escaláveis. De MVPs rápidos a sistemas complexos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Inteligência Artificial & Dados</h3>
+                    <p>Modelos de Machine Learning para saúde (análise de sinais, imagens) e automação de processos repetitivos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Segurança & Forense</h3>
+                    <p>Análise de vulnerabilidades, proteção de dados sensíveis (LGPD/Health Data) e detecção de deepfakes.</p>
+                </div>
+            </div>
         </section>
 
-        <div class="services-grid reveal">
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Dashboards & B.I.</h3>
-                <p>Chega de "achismo". Criamos painéis interativos para você controlar finanças, estoque e operações em tempo real.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-robot"></i></div>
-                <h3>Automação (RPA)</h3>
-                <p>Robôs de software que leem e-mails, baixam notas e preenchem planilhas. Liberamos seu tempo estratégico.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-rocket"></i></div>
-                <h3>Desenvolvimento de MVPs</h3>
-                <p>Tire sua ideia do papel em semanas. Foco total em HealthTech, AgroTech e FinTechs.</p>
-            </div>
-        </div>
-
-        <h2 class="section-header reveal">Nossos Cases</h2>
+        <h2 class="section-header reveal">Inovação & Portfólio</h2>
         <div class="projects-grid">
-
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-layer-group"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">ERP • Gestão Própria</span>
-                    <h3 class="card-title">Athena OS</h3>
-                    <p class="card-desc">Um ERP completo construído do zero. Centraliza gestão de múltiplos projetos, controle financeiro, Kanban e automação de logs.</p>
-                    <div style="margin-top: auto;">
-                        <span class="tech-tag">Python</span> <span class="tech-tag">Gestão</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-leaf"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">AgroTech • Monitoramento</span>
-                    <h3 class="card-title">Projeto Amana</h3>
-                    <p class="card-desc">Monitoramento de condições climáticas para pequenos produtores. Integração de dados complexos em interfaces simples para decisão no campo.</p>
-                    <div style="margin-top: auto;">
-                        <span class="tech-tag">IoT</span> <span class="tech-tag">Data Analysis</span>
-                    </div>
-                </div>
-            </div>
 
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-heartbeat"></i></div>
                 <div class="card-content">
-                    <span class="card-meta">HealthTech • IoT Médico</span>
+                    <span class="card-meta">HealthTech • IoT</span>
                     <h3 class="card-title">HeartGuard</h3>
-                    <p class="card-desc">Monitoramento remoto de pacientes cardíacos com precisão médica. Sistema IoT com dashboard em tempo real para médicos.</p>
+                    <p class="card-desc">Monitoramento cardíaco remoto via IoT com IA (CNN) de 99% de acurácia na detecção de arritmias.</p>
                     <div style="margin-top: auto;">
-                        <span class="tech-tag">Biomedicina</span> <span class="tech-tag">AI</span>
+                        <span class="tech-tag">Python</span> <span class="tech-tag">TensorFlow</span> <span class="tech-tag">Edge AI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-layer-group"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">ERP • Gestão</span>
+                    <h3 class="card-title">Athena OS</h3>
+                    <p class="card-desc">Sistema de gestão próprio construído do zero. Centraliza finanças, projetos e automação pessoal.</p>
+                    <div style="margin-top: auto;">
+                        <span class="tech-tag">Python</span> <span class="tech-tag">Automation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-calendar-alt"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Social Impact • Security</span>
+                    <h3 class="card-title">MyCalendar (SOS)</h3>
+                    <p class="card-desc">App camuflado que serve como botão de pânico oculto para mulheres em situação de risco.</p>
+                    <div style="margin-top: auto;">
+                        <span class="tech-tag">Mobile</span> <span class="tech-tag">Security</span>
+                    </div>
+                </div>
+            </div>
+
+             <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-leaf"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">AgroTech • Dados</span>
+                    <h3 class="card-title">Amana</h3>
+                    <p class="card-desc">Monitoramento climático inteligente para pequenos produtores rurais, otimizando recursos hídricos.</p>
+                    <div style="margin-top: auto;">
+                        <span class="tech-tag">IoT</span> <span class="tech-tag">Data Science</span>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="why-us reveal">
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem;">Por que escolher a Athena?</h3>
-            <div class="why-grid">
-                <div class="why-item">
-                    <h4>Visão Híbrida</h4>
-                    <p>Rigor da Engenharia + Agilidade de Negócios.</p>
-                </div>
-                <div class="why-item">
-                    <h4>Entrega Rápida</h4>
-                    <p>Tecnologias modernas para entregar em semanas, não meses.</p>
-                </div>
-                <div class="why-item">
-                    <h4>Foco em Dados</h4>
-                    <p>Tudo o que construímos gera métricas claras.</p>
-                </div>
+        <h2 class="section-header reveal" style="font-size: 1.5rem; margin-top: 0;">Laboratório de Código (Open Source)</h2>
+        <div class="opensource-list reveal" style="margin-bottom: 80px;">
+            <div class="os-card">
+                <h4>Auction House System</h4>
+                <span>Java • WebSockets</span>
+                <p>Backend de alta performance para leilões em tempo real.</p>
+            </div>
+            <div class="os-card">
+                <h4>NLP Spam Classifier</h4>
+                <span>AI • NLP</span>
+                <p>Filtro de spam utilizando processamento de linguagem natural.</p>
+            </div>
+            <div class="os-card">
+                <h4>Alchemist's Duel</h4>
+                <span>Game Dev</span>
+                <p>Jogo de lógica e estratégia inspirado em elementos químicos.</p>
+            </div>
+            <div class="os-card">
+                <h4>Lab Pentest</h4>
+                <span>Security</span>
+                <p>Ambiente Linux configurado para testes de intrusão éticos.</p>
             </div>
         </div>
 
-        <footer>
+        <footer id="contato">
             <div class="social-links">
                 <a href="https://github.com/natalialigabo"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/natalialigabo/"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:natalialigabo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p style="margin-top: 20px;">© 2026 Athena Venture Builder. Liderado por Natalia Ligabo.</p>
+            <p style="margin-top: 20px;">© 2026 Natalia Ligabo. Construído com código.</p>
         </footer>
 
     </div>
