@@ -8,34 +8,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CONFIGURAÇÕES VISUAIS (DARK MODE PADRÃO) --- */
+        /* --- 1. CONFIGURAÇÕES DARK MODE (O PADRÃO) --- */
         :root {
-            --bg-color: #faf9f6;     
-            --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #faf9f6 100%);
-            --text-main: #111827;     
-            --text-muted: #4b5563;   
+            /* Fundo Geral */
+            --bg-color: #fdfbd4;      
+            --bg-gradient: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
+            
+            /* Textos */
+            --text-main: #ffffff;     
+            --text-muted: #9ca3af;    
             --accent: #d4b2d8;        
+            
+            /* Cards de Projeto */
             --card-bg: #161b22;       
             --border: #333;           
             --card-hover-bg: #1c2128;
             --shadow: none;
-            --wrapper-bg: #161b22;       
+
+            /* QUADRADO DO TOPO (WRAPPER) NO DARK MODE */
+            --wrapper-bg: #161b22; /* Fica da cor dos cards */
             --wrapper-border: #333;
             --wrapper-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        /* --- CONFIGURAÇÕES LIGHT MODE (TEMA CLARO) --- */
+        /* --- 2. CONFIGURAÇÕES LIGHT MODE (TEMA CLARO SUAVE) --- */
         [data-theme="light"] {
-            --bg-color: #f9fafb;
-            --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #f3f4f6 80%);
+            /* Fundo Geral (Branco Papel Suave) */
+            --bg-color: #faf9f6;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #faf9f6 100%);
+            
+            /* Textos */
             --text-main: #111827;     
             --text-muted: #4b5563;    
             --accent: #7c3aed;        
+            
+            /* Cards de Projeto */
             --card-bg: #ffffff;       
             --border: #e5e7eb;        
             --card-hover-bg: #f9fafb;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --wrapper-bg:  #C9A9A6;      
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            
+            /* QUADRADO DO TOPO (WRAPPER) NO LIGHT MODE */
+            --wrapper-bg: #f9f7f1; /* Bege/Papel Clássico */
             --wrapper-border: #e5e7eb;
             --wrapper-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
         }
@@ -57,172 +71,79 @@
 
         .container { max-width: 1100px; margin: 0 auto; position: relative; }
 
-        /* --- BOTÃO DE TEMA (FIXO) --- */
+        /* --- BOTÕES FLUTUANTES --- */
         .theme-toggle {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: fixed; top: 25px; right: 25px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            color: var(--text-main); width: 45px; height: 45px;
+            border-radius: 50%; cursor: pointer; z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
-        .theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: rotate(15deg); }
+        .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
-        /* --- SELETOR DE IDIOMA (CÁPSULA) --- */
         .lang-switch-container {
-            position: fixed;
-            top: 25px;
-            right: 85px; /* Fica à esquerda do botão de tema */
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 8px 15px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 999;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            position: fixed; top: 25px; right: 85px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            padding: 8px 15px; border-radius: 30px;
+            display: flex; align-items: center; gap: 8px; z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
         }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-            padding: 2px;
-        }
-        
-        .lang-btn:hover { color: var(--text-main); }
-        .lang-btn.active-lang {
-            color: var(--accent);
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
+        .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; font-weight: 600; font-size: 0.9rem; padding: 2px; }
+        .lang-btn.active-lang { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
         .lang-divider { color: var(--border); font-size: 0.8rem; }
 
-        @media (max-width: 768px) {
-            .lang-switch-container { top: 80px; right: 25px; }
-        }
+        @media (max-width: 768px) { .lang-switch-container { top: 80px; right: 25px; } }
 
         /* --- O RETÂNGULO CLÁSSICO (WRAPPER) --- */
         .classic-hero-wrapper {
             background-color: var(--wrapper-bg);
             border: 1px solid var(--wrapper-border);
             border-radius: 24px;
-            padding: 50px;       
+            padding: 60px 40px;       
             margin-top: 40px;    
-            margin-bottom: 80px; 
+            margin-bottom: 60px; 
             box-shadow: var(--wrapper-shadow);
             transition: all 0.3s ease;
+            text-align: center; /* Centraliza tudo dentro do cartão */
         }
-
+        
         .classic-hero-wrapper header {
-            padding-top: 20px;
-            min-height: auto;
-            padding-bottom: 60px;
+            min-height: auto; padding: 0;
+            display: flex; flex-direction: row; align-items: center; justify-content: space-between;
+            text-align: left;
         }
 
-        .classic-hero-wrapper .about-section {
-            border-top: none;
-            border-bottom: none;
-            padding: 40px 0 20px 0;
-            margin-bottom: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .classic-hero-wrapper { padding: 30px 20px; border-radius: 16px; }
-        }
+        /* --- HEADER ITENS --- */
+        .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 10px; color: var(--text-main); }
+        .hero-text .subtitle { font-size: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-weight: 600; display: block; margin-bottom: 15px; }
+        .hero-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 500px; }
+        .hero-image img { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); box-shadow: 0 0 50px rgba(212, 178, 216, 0.15); }
 
-        /* --- ANIMAÇÃO REVEAL --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- HEADER & HERO --- */
-        header { min-height: 85vh; display: flex; align-items: center; justify-content: space-between; padding-top: 60px; }
-        
-        .hero-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--text-main);
-        }
-        .hero-text .subtitle {
-            font-size: 1rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            display: block;
-            font-weight: 600;
-        }
-        .hero-desc { font-size: 1.2rem; color: var(--text-muted); max-width: 550px; }
-        
-        .hero-image img {
-            width: 320px; height: 320px; border-radius: 50%; object-fit: cover;
-            border: 1px solid var(--border);
-            box-shadow: 0 0 50px rgba(212, 178, 216, 0.15);
-        }
-
-        /* --- SEÇÕES --- */
+        /* --- BIO (FORA DO QUADRADO) --- */
         .about-section { padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 80px; }
         .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; align-items: start; }
         .about-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--text-main); }
         .about-text p { margin-bottom: 20px; font-size: 1.1rem; color: var(--text-muted); }
 
+        /* --- SEÇÕES & CARDS --- */
         .section-header { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 50px; text-align: center; color: var(--text-main); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-bottom: 100px; }
-
-        /* --- CARDS --- */
-        .blog-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-            display: flex; flex-direction: column;
-            box-shadow: var(--shadow);
-        }
+        
+        .blog-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s, border-color 0.3s; display: flex; flex-direction: column; box-shadow: var(--shadow); }
         .blog-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-
-        .card-image {
-            height: 180px; background: var(--bg-color); display: flex;
-            align-items: center; justify-content: center; font-size: 3rem; color: var(--accent);
-            border-bottom: 1px solid var(--border);
-        }
+        .card-image { height: 180px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--accent); border-bottom: 1px solid var(--border); }
         .card-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
         .card-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px; }
         .card-title { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-main); }
         .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
-        
-        .btn-link {
-            margin-top: auto; text-decoration: none; color: var(--text-main); font-weight: 600;
-            border-bottom: 1px solid var(--accent); padding-bottom: 2px;
-            display: inline-block; width: fit-content;
-        }
+        .btn-link { margin-top: auto; text-decoration: none; color: var(--text-main); font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; width: fit-content; }
 
         /* --- OPEN SOURCE --- */
         .opensource-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .os-card {
-            background: var(--card-bg); padding: 25px; border-radius: 8px;
-            border: 1px solid var(--border); transition: all 0.3s; box-shadow: var(--shadow);
-        }
+        .os-card { background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border); transition: all 0.3s; box-shadow: var(--shadow); }
         .os-card:hover { border-color: var(--accent); background: var(--card-hover-bg); }
         .os-card h4 { margin-bottom: 5px; color: var(--text-main); }
         .os-card span { font-size: 0.8rem; color: var(--accent); font-family: monospace; }
@@ -232,19 +153,23 @@
         .social-links a { color: var(--text-main); margin: 0 15px; font-size: 1.5rem; transition: color 0.3s; }
         .social-links a:hover { color: var(--accent); }
 
+        /* MOBILE */
         @media (max-width: 768px) {
-            header { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
-            .hero-text h1 { font-size: 2.8rem; }
+            .classic-hero-wrapper header { flex-direction: column-reverse; text-align: center; }
+            .hero-text h1 { font-size: 2.5rem; }
             .about-grid { grid-template-columns: 1fr; }
-            .hero-image img { width: 250px; height: 250px; margin-bottom: 30px; }
+            .hero-image img { width: 220px; height: 220px; margin-bottom: 30px; }
+            .classic-hero-wrapper { padding: 30px 20px; }
         }
+        
+        /* ANIMAÇÃO */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <button class="theme-toggle" id="theme-toggle" aria-label="Mudar Tema">
-        <i class="fas fa-moon"></i>
-    </button>
+    <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
 
     <div class="lang-switch-container">
         <button class="lang-btn active-lang" data-lang="pt">PT</button>
@@ -255,7 +180,6 @@
     <div class="container">
         
         <div class="classic-hero-wrapper reveal">
-            
             <header>
                 <div class="hero-text">
                     <h1 class="hero-title">Natalia Ligabo<br>dos Santos</h1> 
@@ -268,118 +192,86 @@
                     <img src="avatar.jpeg" alt="Natalia Ligabo">
                 </div>
             </header>
-
-        </div> <section class="about-section reveal">
+        </div>
+        <section class="about-section reveal">
             <div class="about-grid">
                 <div class="about-title" data-i18n="about_title">Sobre<br>Mim</div>
                 <div class="about-text">
                     <p data-i18n="about_p1"><strong>"De Biomédica a Dev?"</strong> Sim, é uma mistura exótica. 🧬💻</p>
                     <p data-i18n="about_p2">Troquei o microscópio pelo VS Code quando percebi que a programação me permitia "diagnosticar" e resolver problemas numa escala muito maior.</p>
                     <p data-i18n="about_p3">Hoje, uso minha bagagem analítica para escrever códigos limpos e criar arquiteturas robustas. Seja detectando arritmias com IA ou otimizando a logística de empresas.</p>
-                    <p style="font-size: 0.95rem; font-style: italic; opacity: 0.8;">(E claro, tomar um bom café enquanto o código compila ☕).</p>
                 </div>
             </div>
         </section>
 
-        </div> <h2 class="section-header reveal" data-i18n="section_innovation">Inovação & Sistemas Complexos</h2>
+        <h2 class="section-header reveal" data-i18n="section_innovation">Inovação & Sistemas Complexos</h2>
         <div class="projects-grid">
-            
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-heartbeat"></i></div>
                 <div class="card-content">
                     <span class="card-meta">IoMT • HealthTech</span>
                     <h3 class="card-title">HeartGuard</h3>
-                    <p class="card-desc" data-i18n="desc_heartguard">Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia. Tecnologia que salva vidas.</p>
+                    <p class="card-desc" data-i18n="desc_heartguard">Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia.</p>
                     <a href="heartguard.html" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-route"></i></div>
                 <div class="card-content">
                     <span class="card-meta">Logística • B2B</span>
                     <h3 class="card-title">Projeto Hera</h3>
-                    <p class="card-desc" data-i18n="desc_hera">Plataforma de inteligência logística e prospecção. Algoritmos de otimização para "tarefas impossíveis".</p>
+                    <p class="card-desc" data-i18n="desc_hera">Plataforma de inteligência logística e prospecção.</p>
                     <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-leaf"></i></div>
                 <div class="card-content">
                     <span class="card-meta">AgroTech • IoT</span>
                     <h3 class="card-title">Projeto Amana</h3>
-                    <p class="card-desc" data-i18n="desc_amana">Monitoramento climático de precisão para agricultura sustentável e otimização de recursos.</p>
+                    <p class="card-desc" data-i18n="desc_amana">Monitoramento climático de precisão.</p>
                     <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-brain"></i></div>
                 <div class="card-content">
                     <span class="card-meta">Neurociência • BCI</span>
                     <h3 class="card-title">Classificador EEG</h3>
-                    <p class="card-desc" data-i18n="desc_eeg">Interface Cérebro-Computador que traduz sinais mentais em comandos digitais usando Machine Learning.</p>
+                    <p class="card-desc" data-i18n="desc_eeg">Interface Cérebro-Computador via Machine Learning.</p>
                     <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
                 </div>
             </div>
-
              <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-calendar-alt"></i></div>
                 <div class="card-content">
                     <span class="card-meta">Segurança • Social</span>
                     <h3 class="card-title">MyCalendar (SOS)</h3>
-                    <p class="card-desc" data-i18n="desc_calendar">App camuflado que serve como botão de pânico silencioso para situações de risco pessoal.</p>
+                    <p class="card-desc" data-i18n="desc_calendar">App camuflado de botão de pânico.</p>
                     <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-fingerprint"></i></div>
                 <div class="card-content">
                     <span class="card-meta">Cibersegurança • IA</span>
                     <h3 class="card-title">Deepfake Hunter</h3>
-                    <p class="card-desc" data-i18n="desc_deepfake">Algoritmo forense para detecção de vídeos manipulados e fraudes digitais.</p>
+                    <p class="card-desc" data-i18n="desc_deepfake">Algoritmo forense para detecção de vídeos manipulados.</p>
                     <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
                 </div>
             </div>
-
         </div>
 
         <h2 class="section-header reveal" data-i18n="section_labs">Laboratório de Engenharia</h2>
         <div class="opensource-list reveal">
-            <div class="os-card">
-                <h4>TechBank</h4><span>Java • Spring Boot</span>
-                <p>Backend bancário robusto com autenticação.</p>
-            </div>
-            <div class="os-card">
-                <h4>Auction House</h4><span>WebSockets • Java</span>
-                <p>Sistema de leilões em tempo real.</p>
-            </div>
-            <div class="os-card">
-                <h4>Alchemist's Duel</h4><span>Game Dev • Python</span>
-                <p>Jogo de estratégia focado em lógica de objetos.</p>
-            </div>
-            <div class="os-card">
-                <h4>Adaptive Chess AI</h4><span>Algoritmos • IA</span>
-                <p>Engine de xadrez que aprende com o jogador.</p>
-            </div>
-            <div class="os-card">
-                <h4>HealthMetric Hub</h4><span>FHIR • Padrões</span>
-                <p>Hub de interoperabilidade hospitalar.</p>
-            </div>
-            <div class="os-card">
-                <h4>NLP Spam Classifier</h4><span>Machine Learning</span>
-                <p>Filtro inteligente de mensagens.</p>
-            </div>
-            <div class="os-card">
-                <h4>Pentest Lab</h4><span>Kali Linux • Security</span>
-                <p>Ambiente para testes de invasão.</p>
-            </div>
-            <div class="os-card">
-                <h4>Conecta Idoso</h4><span>Web • Acessibilidade</span>
-                <p>Plataforma de inclusão digital.</p>
-            </div>
+            <div class="os-card"><h4>TechBank</h4><span>Java • Spring Boot</span><p>Backend bancário robusto.</p></div>
+            <div class="os-card"><h4>Auction House</h4><span>WebSockets • Java</span><p>Leilões em tempo real.</p></div>
+            <div class="os-card"><h4>Alchemist's Duel</h4><span>Game Dev • Python</span><p>Jogo de estratégia.</p></div>
+            <div class="os-card"><h4>Adaptive Chess AI</h4><span>Algoritmos • IA</span><p>Engine de xadrez.</p></div>
+            <div class="os-card"><h4>HealthMetric Hub</h4><span>FHIR • Padrões</span><p>Interoperabilidade hospitalar.</p></div>
+            <div class="os-card"><h4>NLP Spam Classifier</h4><span>Machine Learning</span><p>Filtro inteligente.</p></div>
+            <div class="os-card"><h4>Pentest Lab</h4><span>Kali Linux • Security</span><p>Ambiente de invasão.</p></div>
+            <div class="os-card"><h4>Conecta Idoso</h4><span>Web • Acessibilidade</span><p>Inclusão digital.</p></div>
         </div>
 
         <footer>
@@ -390,11 +282,10 @@
             </div>
             <p style="margin-top: 20px;" data-i18n="footer_text">© 2026 Natalia Ligabo.</p>
         </footer>
-
     </div>
 
     <script>
-        // --- 1. DICIONÁRIO DE TRADUÇÕES ---
+        // --- 1. TRADUÇÕES ---
         const translations = {
             pt: {
                 role: "Biomédica & Engenheira de Software",
@@ -406,12 +297,12 @@
                 section_innovation: "Inovação & Sistemas Complexos",
                 section_labs: "Laboratório de Engenharia",
                 btn_case: "Ver Case Study",
-                desc_heartguard: "Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia. Tecnologia que salva vidas.",
-                desc_hera: "Plataforma de inteligência logística e prospecção. Algoritmos de otimização para \"tarefas impossíveis\".",
-                desc_amana: "Monitoramento climático de precisão para agricultura sustentável e otimização de recursos.",
-                desc_eeg: "Interface Cérebro-Computador que traduz sinais mentais em comandos digitais usando Machine Learning.",
-                desc_calendar: "App camuflado que serve como botão de pânico silencioso para situações de risco pessoal.",
-                desc_deepfake: "Algoritmo forense para detecção de vídeos manipulados e fraudes digitais.",
+                desc_heartguard: "Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia.",
+                desc_hera: "Plataforma de inteligência logística e prospecção.",
+                desc_amana: "Monitoramento climático de precisão.",
+                desc_eeg: "Interface Cérebro-Computador via Machine Learning.",
+                desc_calendar: "App camuflado de botão de pânico.",
+                desc_deepfake: "Algoritmo forense para detecção de vídeos manipulados.",
                 footer_text: "© 2026 Natalia Ligabo."
             },
             en: {
@@ -420,21 +311,20 @@
                 about_title: "About<br>Me",
                 about_p1: "<strong>\"From Scientist to Dev?\"</strong> Yes, it's an exotic mix. 🧬💻",
                 about_p2: "I traded the microscope for VS Code when I realized that programming allowed me to \"diagnose\" and solve problems on a much larger scale.",
-                about_p3: "Today, I use my analytical background to write clean code and build robust architectures. Whether detecting arrhythmias with AI or optimizing corporate logistics.",
+                about_p3: "Today, I use my analytical background to write clean code and build robust architectures.",
                 section_innovation: "Innovation & Complex Systems",
                 section_labs: "Engineering Labs",
                 btn_case: "View Case Study",
-                desc_heartguard: "IoT cardiac monitoring with 99% accuracy AI (CNN). Technology that saves lives.",
-                desc_hera: "Logistics intelligence and prospecting platform. Optimization algorithms for \"impossible tasks\".",
-                desc_amana: "Precision climate monitoring for sustainable agriculture and resource optimization.",
-                desc_eeg: "Brain-Computer Interface translating mental signals into digital commands using Machine Learning.",
-                desc_calendar: "Camouflaged app serving as a silent panic button for personal risk situations.",
-                desc_deepfake: "Forensic algorithm for detecting manipulated videos and digital fraud.",
+                desc_heartguard: "IoT cardiac monitoring with 99% accuracy AI (CNN).",
+                desc_hera: "Logistics intelligence platform.",
+                desc_amana: "Precision climate monitoring.",
+                desc_eeg: "Brain-Computer Interface via Machine Learning.",
+                desc_calendar: "Camouflaged panic button app.",
+                desc_deepfake: "Forensic algorithm for deepfake detection.",
                 footer_text: "© 2026 Natalia Ligabo. Built with code."
             }
         };
 
-        // --- 2. LÓGICA DE TROCA DE IDIOMA ---
         const langButtons = document.querySelectorAll('.lang-btn');
         let currentLang = localStorage.getItem('language') || 'pt';
 
@@ -452,23 +342,21 @@
         }
 
         langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.getAttribute('data-lang');
-                setLanguage(lang);
-            });
+            btn.addEventListener('click', () => { setLanguage(btn.getAttribute('data-lang')); });
         });
 
-        // --- 3. LÓGICA DO TEMA (DARK/LIGHT) ---
+        // --- 2. DARK/LIGHT MODE ---
         const toggleButton = document.getElementById('theme-toggle');
         const icon = toggleButton.querySelector('i');
         const html = document.documentElement;
-
+        
+        // Padrão: Dark Mode
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             html.setAttribute('data-theme', savedTheme);
             updateIcon(savedTheme);
         } else {
-            html.setAttribute('data-theme', 'dark'); // Padrão
+            html.setAttribute('data-theme', 'dark');
             updateIcon('dark');
         }
 
@@ -481,27 +369,19 @@
         });
 
         function updateIcon(theme) {
-            if (theme === 'light') {
-                icon.className = 'fas fa-sun';
-            } else {
-                icon.className = 'fas fa-moon';
-            }
+            icon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
         }
 
-        // --- 4. ANIMAÇÃO SCROLL ---
+        // --- 3. SCROLL REVEAL ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
-        
-        // Inicialização
         reveal();
         setLanguage(currentLang);
     </script>
