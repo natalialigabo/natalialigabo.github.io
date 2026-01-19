@@ -10,46 +10,32 @@
     <style>
         /* --- 1. CONFIGURAÇÕES DARK MODE (O PADRÃO) --- */
         :root {
-            /* Fundo Geral */
             --bg-color: #0f1115;      
             --bg-gradient: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
-            
-            /* Textos */
             --text-main: #ffffff;     
             --text-muted: #9ca3af;    
             --accent: #d4b2d8;        
-            
-            /* Cards de Projeto */
             --card-bg: #161b22;       
             --border: #333;           
             --card-hover-bg: #1c2128;
             --shadow: none;
-
-            /* QUADRADO DO TOPO (WRAPPER) NO DARK MODE */
-            --wrapper-bg: #161b22; /* Fica da cor dos cards */
+            --wrapper-bg: #161b22; 
             --wrapper-border: #333;
-            --wrapper-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            --wrapper-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
         /* --- 2. CONFIGURAÇÕES LIGHT MODE (TEMA CLARO SUAVE) --- */
         [data-theme="light"] {
-            /* Fundo Geral (Branco Papel Suave) */
-            --bg-color: #fdfbd4;
+            --bg-color: #faf9f6;
             --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #faf9f6 100%);
-            
-            /* Textos */
             --text-main: #111827;     
             --text-muted: #4b5563;    
             --accent: #7c3aed;        
-            
-            /* Cards de Projeto */
             --card-bg: #ffffff;       
             --border: #e5e7eb;        
             --card-hover-bg: #f9fafb;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            
-            /* QUADRADO DO TOPO (WRAPPER) NO LIGHT MODE */
-            --wrapper-bg: #C9A9A6; /* Bege/Papel Clássico */
+            --wrapper-bg: #c9a9a6; 
             --wrapper-border: #e5e7eb;
             --wrapper-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
         }
@@ -102,12 +88,12 @@
             background-color: var(--wrapper-bg);
             border: 1px solid var(--wrapper-border);
             border-radius: 24px;
-            padding: 60px 40px;       
+            padding: 60px 50px;       
             margin-top: 40px;    
             margin-bottom: 60px; 
             box-shadow: var(--wrapper-shadow);
             transition: all 0.3s ease;
-            text-align: center; /* Centraliza tudo dentro do cartão */
+            text-align: center;
         }
         
         .classic-hero-wrapper header {
@@ -116,17 +102,46 @@
             text-align: left;
         }
 
-        /* --- HEADER ITENS --- */
         .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 10px; color: var(--text-main); }
         .hero-text .subtitle { font-size: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-weight: 600; display: block; margin-bottom: 15px; }
         .hero-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 500px; }
         .hero-image img { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); box-shadow: 0 0 50px rgba(212, 178, 216, 0.15); }
 
-        /* --- BIO (FORA DO QUADRADO) --- */
-        .about-section { padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 80px; }
-        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; align-items: start; }
-        .about-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--text-main); }
-        .about-text p { margin-bottom: 20px; font-size: 1.1rem; color: var(--text-muted); }
+        /* --- BIO (CENTRALIZADA E EMPILHADA) --- */
+        .about-section { 
+            padding: 40px 0 80px 0; 
+            border-top: 1px solid var(--border); 
+            border-bottom: 1px solid var(--border); 
+            margin-bottom: 80px; 
+        }
+        
+        /* MUDANÇA AQUI: Flex Column + Center */
+        .about-grid { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center; 
+            gap: 30px; 
+        }
+        
+        .about-title { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.8rem; /* Um pouco maior para destaque */
+            color: var(--text-main); 
+            margin-bottom: 10px;
+        }
+        
+        .about-text {
+            max-width: 750px; /* Limita a largura para ficar elegante */
+            margin: 0 auto;
+        }
+        
+        .about-text p { 
+            margin-bottom: 25px; 
+            font-size: 1.15rem; 
+            color: var(--text-muted); 
+            line-height: 1.8;
+        }
 
         /* --- SEÇÕES & CARDS --- */
         .section-header { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 50px; text-align: center; color: var(--text-main); }
@@ -157,7 +172,6 @@
         @media (max-width: 768px) {
             .classic-hero-wrapper header { flex-direction: column-reverse; text-align: center; }
             .hero-text h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; }
             .hero-image img { width: 220px; height: 220px; margin-bottom: 30px; }
             .classic-hero-wrapper { padding: 30px 20px; }
         }
@@ -193,9 +207,11 @@
                 </div>
             </header>
         </div>
+
         <section class="about-section reveal">
             <div class="about-grid">
-                <div class="about-title" data-i18n="about_title">Sobre<br>Mim</div>
+                <div class="about-title" data-i18n="about_title">Sobre Mim</div>
+                
                 <div class="about-text">
                     <p data-i18n="about_p1"><strong>"De Biomédica a Dev?"</strong> Sim, é uma mistura exótica. 🧬💻</p>
                     <p data-i18n="about_p2">Troquei o microscópio pelo VS Code quando percebi que a programação me permitia "diagnosticar" e resolver problemas numa escala muito maior.</p>
@@ -290,7 +306,7 @@
             pt: {
                 role: "Biomédica & Engenheira de Software",
                 hero_desc: "Transformando problemas complexos em soluções digitais de alta performance — da Saúde à Logística Corporativa.",
-                about_title: "Sobre<br>Mim",
+                about_title: "Sobre Mim",
                 about_p1: "<strong>\"De Biomédica a Dev?\"</strong> Sim, é uma mistura exótica. 🧬💻",
                 about_p2: "Troquei o microscópio pelo VS Code quando percebi que a programação me permitia \"diagnosticar\" e resolver problemas numa escala muito maior.",
                 about_p3: "Hoje, uso minha bagagem analítica para escrever códigos limpos e criar arquiteturas robustas. Seja detectando arritmias com IA ou otimizando a logística de empresas.",
@@ -308,7 +324,7 @@
             en: {
                 role: "Biomedical Scientist & Software Engineer",
                 hero_desc: "Transforming complex problems into high-performance digital solutions — from Healthcare to Corporate Logistics.",
-                about_title: "About<br>Me",
+                about_title: "About Me",
                 about_p1: "<strong>\"From Scientist to Dev?\"</strong> Yes, it's an exotic mix. 🧬💻",
                 about_p2: "I traded the microscope for VS Code when I realized that programming allowed me to \"diagnose\" and solve problems on a much larger scale.",
                 about_p3: "Today, I use my analytical background to write clean code and build robust architectures.",
@@ -350,7 +366,6 @@
         const icon = toggleButton.querySelector('i');
         const html = document.documentElement;
         
-        // Padrão: Dark Mode
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             html.setAttribute('data-theme', savedTheme);
