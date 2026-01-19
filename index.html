@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natalia Ligabô dos Santos | Engenheira de Software</title>
+    <title>Natalia Ligabo | Engenheira de Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -18,12 +18,20 @@
             --border: #333;           /* Bordas sutis */
         }
 
-        /* Reset Básico */
+        body.light-mode {
+            --bg-color: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --accent: #9333ea;
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             background-color: var(--bg-color);
-            /* O GRADIENTE PREMIUM (FUNDO ESCURO FIXO) */
+            /* O GRADIENTE PREMIUM FIXO */
             background-image: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
             background-attachment: fixed;
             color: var(--text-main);
@@ -32,9 +40,32 @@
             padding: 0 20px;
             overflow-x: hidden;
             min-height: 100vh;
+            transition: color 0.3s;
         }
 
         .container { max-width: 1100px; margin: 0 auto; position: relative; }
+
+        /* --- BOTÃO DE TEMA (AGORA FIXO NA TELA) --- */
+        .theme-toggle {
+            position: fixed; /* Fixa na tela */
+            top: 25px;
+            right: 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 9999; /* Garante que fica por cima de tudo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: rotate(15deg); }
 
         /* --- ANIMAÇÃO DE APARECIMENTO --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
@@ -51,7 +82,7 @@
 
         .hero-text h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 3.5rem; /* Ajustado para caber o nome grande */
             line-height: 1.1;
             margin-bottom: 20px;
         }
@@ -79,10 +110,10 @@
             border-radius: 50%;
             object-fit: cover;
             border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 0 50px rgba(212, 178, 216, 0.15); /* Brilho lilás */
+            box-shadow: 0 0 50px rgba(212, 178, 216, 0.15);
         }
 
-        /* --- SEÇÃO SOBRE (BIO AMPLIADA) --- */
+        /* --- SEÇÃO SOBRE (BIO DESCONTRAÍDA) --- */
         .about-section {
             padding: 80px 0;
             border-top: 1px solid var(--border);
@@ -173,7 +204,7 @@
         /* Mobile */
         @media (max-width: 768px) {
             header { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
-            .hero-text h1 { font-size: 3rem; }
+            .hero-text h1 { font-size: 2.8rem; }
             .about-grid { grid-template-columns: 1fr; }
             .hero-image img { width: 250px; height: 250px; margin-bottom: 30px; }
         }
@@ -181,12 +212,16 @@
 </head>
 <body>
 
+    <button class="theme-toggle" id="theme-toggle" aria-label="Mudar Tema">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <div class="container">
         
         <header>
             <div class="hero-text reveal">
                 <span class="subtitle">Biomedical Scientist & Software Engineer</span>
-                <h1>Natalia Ligabo</h1>
+                <h1>Natalia Ligabo<br>dos Santos</h1>
                 <p class="hero-desc">
                     Transformando problemas complexos em soluções digitais de alta performance — da Saúde à Logística Corporativa.
                 </p>
@@ -198,16 +233,19 @@
 
         <section class="about-section reveal">
             <div class="about-grid">
-                <div class="about-title">Minha<br>Jornada</div>
+                <div class="about-title">Sobre<br>Mim</div>
                 <div class="about-text">
                     <p>
-                        Minha carreira é definida pela <strong>convergência</strong>. Comecei na Biomedicina, onde o rigor científico e a análise de dados críticos eram vitais. Ao migrar para a Engenharia de Computação, trouxe essa disciplina para o desenvolvimento de software.
+                        <strong>"De Biomédica a Dev?"</strong> Sim, é uma mistura exótica. 🧬💻
                     </p>
                     <p>
-                        Hoje, não sou apenas uma desenvolvedora; sou uma solucionadora de problemas. Seja criando algoritmos para detectar arritmias (HeartGuard) ou otimizando rotas de logística complexa (Projeto Hera), meu foco é criar sistemas que sejam robustos, escaláveis e tenham impacto real.
+                        Troquei o microscópio pelo VS Code quando percebi que a programação me permitia "diagnosticar" e resolver problemas numa escala muito maior. Eu não queria apenas analisar um paciente por vez; eu queria construir os sistemas que ajudam milhares.
                     </p>
                     <p>
-                        Busco projetos desafiadores onde a tecnologia precisa encontrar a eficiência do negócio.
+                        Hoje, uso minha bagagem analítica (e aquela obsessão por detalhes da área clínica) para escrever códigos limpos e criar arquiteturas robustas. Seja detectando arritmias com IA ou otimizando a logística de empresas, meu objetivo é um só: usar tecnologia para descomplicar a vida real. 
+                    </p>
+                    <p style="font-size: 0.95rem; font-style: italic; opacity: 0.8;">
+                        (E claro, tomar um bom café enquanto o código compila ☕).
                     </p>
                 </div>
             </div>
@@ -343,6 +381,23 @@
     </div>
 
     <script>
+        // DARK/LIGHT MODE
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = toggleButton.querySelector('i');
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // SCROLL REVEAL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
