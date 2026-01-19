@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Natalia Ligabo | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* --- VARIÁVEIS DE CORES (TEMA PADRÃO: DARK) --- */
         :root {
-            --bg-color: #0f1115;      /* Fundo quase preto (Premium) */
-            --text-main: #ffffff;     /* Texto branco */
-            --text-muted: #9ca3af;    /* Cinza suave */
-            --accent: #d4b2d8;        /* Um lilás suave estilo "Lovable" */
-            --card-bg: #161b22;       /* Fundo dos cards */
+            --bg-color: #0f1115;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --accent: #d4b2d8; /* Lilás suave */
+            --card-bg: #161b22;
+            --border-color: #333;
+            --shadow: rgba(0,0,0,0.2);
+        }
+
+        /* --- TEMA CLARO (ATIVADO VIA JS) --- */
+        body.light-mode {
+            --bg-color: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --accent: #9333ea; /* Roxo mais forte para contraste */
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: rgba(0,0,0,0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,16 +38,43 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             padding: 0 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Container Central */
-        .container { max-width: 900px; margin: 0 auto; }
+        .container { max-width: 1000px; margin: 0 auto; position: relative; }
 
-        /* HEADER ESTILO "SARAH MITCHELL" */
+        /* --- BOTÃO DE TEMA --- */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(15deg);
+        }
+
+        /* --- HEADER COM FOTO --- */
         header {
-            padding: 100px 0 60px;
-            border-bottom: 1px solid #333;
+            padding: 120px 0 80px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
         }
+
+        .header-content { flex: 1; }
 
         .intro-label {
             font-size: 0.9rem;
@@ -46,20 +87,43 @@
         }
 
         h1 {
-            font-family: 'Playfair Display', serif; /* Fonte elegante */
+            font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 30px;
             font-weight: 400;
         }
 
         .bio {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 500px;
         }
 
-        /* SEÇÃO DE PROJETOS */
+        /* Estilo da Imagem de Perfil */
+        .header-image {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px; /* Bordas arredondadas modernas */
+            box-shadow: 20px 20px 0px var(--accent); /* Efeito de sombra sólida */
+            filter: grayscale(20%); /* Um toque elegante */
+            transition: all 0.3s ease;
+        }
+        .header-image img:hover {
+            filter: grayscale(0%);
+            transform: translate(-5px, -5px);
+            box-shadow: 25px 25px 0px var(--accent);
+        }
+
+
+        /* --- SEÇÕES E CARDS --- */
         .section-header {
             margin-top: 80px;
             margin-bottom: 40px;
@@ -67,99 +131,95 @@
             font-size: 2rem;
         }
 
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
+        .project-list { display: flex; flex-direction: column; gap: 30px; }
 
-        /* CARD ESTILO MINIMALISTA */
         .project-item {
             background: var(--card-bg);
             padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .project-item:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
+            box-shadow: 0 10px 30px var(--shadow);
         }
 
         .project-meta {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
             margin-bottom: 15px;
         }
 
         .project-category {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
+            font-weight: 600;
         }
 
         .status-badge {
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: bold;
         }
         .status-private { background: rgba(212, 178, 216, 0.1); color: var(--accent); border: 1px solid var(--accent); }
-        .status-public { background: rgba(110, 231, 183, 0.1); color: #6ee7b7; border: 1px solid #6ee7b7; }
+        .status-public { background: rgba(110, 231, 183, 0.1); color: #10b981; border: 1px solid #10b981; }
+        body.light-mode .status-public { color: #059669; border-color: #059669; }
 
-        .project-title {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #fff;
-        }
+        .project-title { font-size: 2rem; margin-bottom: 15px; color: var(--text-main); }
+        .project-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
 
-        .project-desc {
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            font-size: 1rem;
-        }
-
-        .tech-stack {
-            margin-bottom: 25px;
-        }
         .tech-stack span {
             display: inline-block;
             margin-right: 15px;
             font-size: 0.9rem;
-            color: #fff;
-            font-family: 'Courier New', monospace; /* Toque tech */
+            color: var(--text-main);
+            font-family: 'Courier New', monospace;
+            background: var(--bg-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         .action-link {
             text-decoration: none;
-            color: #fff;
+            color: var(--text-main);
             font-weight: 600;
             border-bottom: 2px solid var(--accent);
             padding-bottom: 2px;
             transition: color 0.3s;
         }
-        .action-link:hover { color: var(--accent); }
+        .action-link:hover { color: var(--accent); background: var(--accent); color: white; padding: 2px 5px; }
 
         /* RODAPÉ */
         footer {
             margin-top: 100px;
             padding: 50px 0;
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--border-color);
             text-align: center;
             color: var(--text-muted);
         }
         .social-links a {
-            color: #fff;
+            color: var(--text-main);
             margin: 0 15px;
             font-size: 1.5rem;
             text-decoration: none;
+            transition: color 0.3s;
         }
+        .social-links a:hover { color: var(--accent); }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+        /* Responsividade para Celular */
+        @media (max-width: 900px) {
+            header { flex-direction: column-reverse; text-align: center; padding-top: 80px; }
+            h1 { font-size: 2.8rem; }
+            .header-image { max-width: 300px; margin-bottom: 30px; }
+            .bio { margin: 0 auto; }
+            .theme-toggle { top: 10px; right: 10px; }
         }
     </style>
 </head>
@@ -167,123 +227,92 @@
 
     <div class="container">
         
+        <button class="theme-toggle" id="theme-toggle" aria-label="Mudar Tema">
+            <i class="fas fa-moon"></i>
+        </button>
+
         <header>
-            <span class="intro-label">Natalia Ligabo</span>
-            <h1>Biomedical Scientist & <br> Software Engineer.</h1>
-            <p class="bio">
-                Unindo neurociência, dados clínicos e engenharia de software para criar a próxima geração de <b>HealthTechs</b> e sistemas de segurança com IA.
-            </p>
+            <div class="header-content">
+                <span class="intro-label">Natalia Ligabo</span>
+                <h1>Biomedical Scientist & <br> Software Engineer.</h1>
+                <p class="bio">
+                    Unindo neurociência, dados clínicos e engenharia de software para criar a próxima geração de <b>HealthTechs</b> e soluções de alto impacto.
+                </p>
+            </div>
+            
+            <div class="header-image">
+                <img src="avatar.jpg" alt="Ilustração de Natalia Ligabo" style="border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);">
+            </div>
         </header>
 
-        <h2 class="section-header">Innovation & Research</h2>
+        <h2 class="section-header">Proprietary Innovation</h2>
         <div class="project-list">
             
             <div class="project-item">
                 <div class="project-meta">
                     <span class="project-category">IoMT • Cardiology</span>
-                    <span class="status-badge status-private"><i class="fas fa-lock"></i> Proprietary</span>
+                    <span class="status-badge status-private"><i class="fas fa-lock"></i> Proprietary Core</span>
                 </div>
                 <h3 class="project-title">HeartGuard</h3>
                 <p class="project-desc">
-                    Sistema avançado de monitoramento cardíaco que utiliza CNNs (Redes Neurais Convolucionais) para detectar arritmias complexas em tempo real com 99% de acurácia. Arquitetura otimizada para dispositivos móveis e wearables.
+                    Sistema avançado de monitoramento cardíaco que utiliza CNNs (Redes Neurais Convolucionais) para detectar arritmias complexas em tempo real com 99% de acurácia.
                 </p>
                 <div class="tech-stack">
-                    <span>Python</span> <span>TensorFlow</span> <span>Edge Computing</span>
+                    <span>Python</span> <span>TensorFlow</span> <span>Edge AI</span>
                 </div>
-                <span style="color: #666; font-size: 0.9rem;">*Código fechado para patente/inovação.</span>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">*Case Study disponível mediante solicitação.</span>
             </div>
 
             <div class="project-item">
                 <div class="project-meta">
-                    <span class="project-category">Computer Vision • Hospitalar</span>
-                    <span class="status-badge status-private"><i class="fas fa-lock"></i> Proprietary</span>
+                    <span class="project-category">Logistics • B2B Sales</span>
+                    <span class="status-badge status-private"><i class="fas fa-lock"></i> Proprietary B2B</span>
                 </div>
-                <h3 class="project-title">Artemis Vision</h3>
+                <h3 class="project-title">Projeto Hera</h3>
                 <p class="project-desc">
-                    IA de visão computacional instalada em salas de espera de emergência. Analisa sinais visuais de deterioração clínica (palidez, sudorese, postura) em pacientes na fila, alertando a triagem automaticamente.
+                    Plataforma de inteligência comercial e logística. Inspirado nos "12 Trabalhos", o sistema resolve desafios complexos de prospecção de leads e otimização de rotas em larga escala.
                 </p>
                 <div class="tech-stack">
-                    <span>OpenCV</span> <span>YOLOv8</span> <span>Bio-Data</span>
+                    <span>Data Mining</span> <span>Optimization Algos</span> <span>Python</span>
                 </div>
-                <span style="color: #666; font-size: 0.9rem;">*Em desenvolvimento confidencial.</span>
-            </div>
-
-            <div class="project-item">
-                <div class="project-meta">
-                    <span class="project-category">AI Forensics • Cybersecurity</span>
-                    <span class="status-badge status-private"><i class="fas fa-shield-alt"></i> Research</span>
-                </div>
-                <h3 class="project-title">Deepfake Hunter</h3>
-                <p class="project-desc">
-                    Algoritmo forense para autenticação de mídia digital. Analisa inconsistências de iluminação e micro-movimentos faciais para distinguir vídeos reais de conteúdo gerado por IA Generativa.
-                </p>
-                <div class="tech-stack">
-                    <span>PyTorch</span> <span>GANs</span> <span>Image Forensics</span>
-                </div>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">*Focado em eficiência operacional corporativa.</span>
             </div>
 
         </div>
 
-        <h2 class="section-header">Open Source Labs</h2>
+        <h2 class="section-header">Engineering Labs (Open Source)</h2>
         <div class="project-list">
 
             <div class="project-item">
                 <div class="project-meta">
-                    <span class="project-category">Game Dev • Logic</span>
-                    <span class="status-badge status-public"><i class="fab fa-github"></i> Open Source</span>
+                    <span class="project-category">Game Dev • OOP Logic</span>
+                    <span class="status-badge status-public"><i class="fab fa-github"></i> Code Available</span>
                 </div>
                 <h3 class="project-title">The Alchemist's Duel</h3>
                 <p class="project-desc">
-                    Jogo de estratégia baseado em lógica de elementos (inspirado em Hogwarts Legacy e CS). Implementa sistemas complexos de classes, inventário e IA de oponente adaptativa.
+                    Jogo de estratégia complexo baseado em combinação de elementos e classes. Demonstra domínio de Programação Orientada a Objetos e lógica de estado de jogo.
                 </p>
                 <div class="tech-stack">
-                    <span>Python / Java</span> <span>OOP</span> <span>Game Logic</span>
-                </div>
-                <a href="https://github.com/natalialigabo" class="action-link">Ver Código no GitHub <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="project-item">
-                <div class="project-meta">
-                    <span class="project-category">Logistics • B2B Sales</span>
-                    <span class="status-badge status-private"><i class="fas fa-lock"></i> Proprietary</span>
-                </div>
-                <h3 class="project-title">Projeto Hera</h3>
-                <p class="project-desc">
-                    Plataforma inteligente de prospecção de clientes e gestão logística. Nomeada em referência aos desafios de Hércules, o sistema automatiza "trabalhos complexos": cruza dados para encontrar leads qualificados e otimiza rotas de entrega em tempo real.
-                </p>
-                <div class="tech-stack">
-                    <span>Python (Scrapy)</span> <span>Optimization Algoritms</span> <span>Data Mining</span>
-                </div>
-                <span style="color: #666; font-size: 0.9rem;">*Código proprietário focado em eficiência operacional.</span>
-            </div>
-
-            <div class="project-item">
-                <div class="project-meta">
-                    <span class="project-category">Algorithms • AI</span>
-                    <span class="status-badge status-public"><i class="fab fa-github"></i> Open Source</span>
-                </div>
-                <h3 class="project-title">Adaptive Chess Engine</h3>
-                <p class="project-desc">
-                    Motor de xadrez que não apenas joga, mas analisa o nível do oponente em tempo real para ajustar a dificuldade, tornando a partida educativa.
-                </p>
-                <div class="tech-stack">
-                    <span>Minimax Algorithm</span> <span>Python</span>
-                </div>
-                <a href="https://github.com/natalialigabo" class="action-link">Ver Código no GitHub <i class="fas fa-arrow-right"></i></a>
-            </div>
-            
-             <div class="project-item">
-                <div class="project-meta">
-                     <span class="project-category">Security</span>
-                    <span class="status-badge status-public"><i class="fab fa-github"></i> Open Source</span>
-                </div>
-                <h3 class="project-title">Lab de Pentest</h3>
-                <p class="project-desc">Ambiente controlado para prática de Ethical Hacking e análise de vulnerabilidades web (DVWA) em Linux.</p>
-                <div class="tech-stack">
-                    <span>Kali Linux</span> <span>Cybersecurity</span>
+                    <span>Java/Python</span> <span>OOP Patterns</span>
                 </div>
                 <a href="https://github.com/natalialigabo" class="action-link">Ver Código <i class="fas fa-arrow-right"></i></a>
             </div>
 
+            <div class="project-item">
+                <div class="project-meta">
+                    <span class="project-category">AI Algorithms</span>
+                    <span class="status-badge status-public"><i class="fab fa-github"></i> Code Available</span>
+                </div>
+                <h3 class="project-title">Adaptive Chess Engine</h3>
+                <p class="project-desc">
+                    Motor de xadrez que analisa o padrão de jogo do oponente em tempo real para ajustar dinamicamente a dificuldade da IA.
+                </p>
+                <div class="tech-stack">
+                    <span>Minimax</span> <span>Heuristic Analysis</span>
+                </div>
+                <a href="https://github.com/natalialigabo" class="action-link">Ver Código <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
         </div>
 
         <footer>
@@ -292,10 +321,28 @@
                 <a href="https://www.linkedin.com/in/natalialigabo/"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:natalialigabo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p style="margin-top: 20px;">© 2026 Natalia Ligabo. Codes & Science.</p>
+            <p style="margin-top: 20px;">© 2026 Natalia Ligabo. Built with code.</p>
         </footer>
 
     </div>
+
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = toggleButton.querySelector('i');
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+    </script>
 
 </body>
 </html>
