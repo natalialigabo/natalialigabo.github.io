@@ -8,31 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CONFIGURAÇÕES VISUAIS --- */
+        /* --- CONFIGURAÇÕES VISUAIS (DARK MODE PADRÃO) --- */
         :root {
-            --bg-color: #0f1115;      /* Preto profundo */
-            --text-main: #ffffff;     /* Branco */
-            --text-muted: #9ca3af;    /* Cinza */
-            --accent: #d4b2d8;        /* Lilás Suave */
-            --card-bg: #161b22;       /* Fundo dos cards */
-            --border: #333;           /* Bordas sutis */
+            --bg-color: #0f1115;      
+            --bg-gradient: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
+            --text-main: #ffffff;     
+            --text-muted: #9ca3af;    
+            --accent: #d4b2d8;        
+            --card-bg: #161b22;       
+            --border: #333;           
+            --card-hover-bg: #1c2128;
+            --shadow: none;
         }
 
-        body.light-mode {
+        /* --- CONFIGURAÇÕES LIGHT MODE (TEMA CLARO) --- */
+        [data-theme="light"] {
             --bg-color: #f9fafb;
-            --text-main: #111827;
-            --text-muted: #4b5563;
-            --accent: #9333ea;
-            --card-bg: #ffffff;
-            --border: #e5e7eb;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #f3f4f6 80%);
+            --text-main: #111827;     /* Preto quase total */
+            --text-muted: #4b5563;    /* Cinza escuro */
+            --accent: #7c3aed;        /* Roxo Vibrante (para contraste no branco) */
+            --card-bg: #ffffff;       /* Cards brancos */
+            --border: #e5e7eb;        /* Bordas cinza claro */
+            --card-hover-bg: #f9fafb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             background-color: var(--bg-color);
-            /* O GRADIENTE PREMIUM FIXO */
-            background-image: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
+            background-image: var(--bg-gradient);
             background-attachment: fixed;
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
@@ -40,14 +46,14 @@
             padding: 0 20px;
             overflow-x: hidden;
             min-height: 100vh;
-            transition: color 0.3s;
+            transition: all 0.3s ease; /* Transição suave entre temas */
         }
 
         .container { max-width: 1100px; margin: 0 auto; position: relative; }
 
-        /* --- BOTÃO DE TEMA (AGORA FIXO NA TELA) --- */
+        /* --- BOTÃO DE TEMA (FIXO) --- */
         .theme-toggle {
-            position: fixed; /* Fixa na tela */
+            position: fixed;
             top: 25px;
             right: 25px;
             background: var(--card-bg);
@@ -57,21 +63,21 @@
             height: 45px;
             border-radius: 50%;
             cursor: pointer;
-            z-index: 9999; /* Garante que fica por cima de tudo */
+            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
         .theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: rotate(15deg); }
 
-        /* --- ANIMAÇÃO DE APARECIMENTO --- */
+        /* --- ANIMAÇÃO REVEAL --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- CABEÇALHO (HERO) --- */
+        /* --- HEADER --- */
         header {
             min-height: 85vh;
             display: flex;
@@ -82,9 +88,10 @@
 
         .hero-text h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem; /* Ajustado para caber o nome grande */
+            font-size: 3.5rem;
             line-height: 1.1;
             margin-bottom: 20px;
+            color: var(--text-main);
         }
 
         .hero-text .subtitle {
@@ -97,73 +104,53 @@
             font-weight: 600;
         }
 
-        .hero-desc {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 550px;
-        }
+        .hero-desc { font-size: 1.2rem; color: var(--text-muted); max-width: 550px; }
 
-        /* Foto de Perfil */
         .hero-image img {
             width: 320px;
             height: 320px;
             border-radius: 50%;
             object-fit: cover;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--border);
             box-shadow: 0 0 50px rgba(212, 178, 216, 0.15);
         }
 
-        /* --- SEÇÃO SOBRE (BIO DESCONTRAÍDA) --- */
-        .about-section {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 80px;
-        }
-
+        /* --- BIO --- */
+        .about-section { padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 80px; }
         .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; align-items: start; }
         .about-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--text-main); }
         .about-text p { margin-bottom: 20px; font-size: 1.1rem; color: var(--text-muted); }
 
-        /* --- PROJETOS DE INOVAÇÃO (CARDS GRANDES) --- */
-        .section-header {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-bottom: 100px;
-        }
+        /* --- CARDS --- */
+        .section-header { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 50px; text-align: center; color: var(--text-main); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-bottom: 100px; }
 
         .blog-card {
             background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
-            transition: transform 0.3s, border-color 0.3s;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
+            box-shadow: var(--shadow);
         }
         .blog-card:hover { transform: translateY(-10px); border-color: var(--accent); }
 
         .card-image {
             height: 180px;
-            background: rgba(255,255,255,0.03);
+            background: var(--bg-color); /* Ajusta ao tema */
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             color: var(--accent);
+            border-bottom: 1px solid var(--border);
         }
 
         .card-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
         .card-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px; }
-        .card-title { font-size: 1.5rem; margin-bottom: 10px; }
+        .card-title { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-main); }
         .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
         
         .btn-link {
@@ -177,21 +164,18 @@
             width: fit-content;
         }
 
-        /* --- OPEN SOURCE (CARDS COMPACTOS) --- */
-        .opensource-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+        /* --- OPEN SOURCE --- */
+        .opensource-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 
         .os-card {
-            background: rgba(255,255,255,0.02);
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 8px;
             border: 1px solid var(--border);
             transition: all 0.3s;
+            box-shadow: var(--shadow);
         }
-        .os-card:hover { border-color: var(--accent); background: var(--card-bg); }
+        .os-card:hover { border-color: var(--accent); background: var(--card-hover-bg); }
         .os-card h4 { margin-bottom: 5px; color: var(--text-main); }
         .os-card span { font-size: 0.8rem; color: var(--accent); font-family: monospace; }
         .os-card p { font-size: 0.9rem; color: var(--text-muted); margin-top: 10px; }
@@ -235,25 +219,16 @@
             <div class="about-grid">
                 <div class="about-title">Sobre<br>Mim</div>
                 <div class="about-text">
-                    <p>
-                        <strong>"De Biomédica a Dev?"</strong> Sim, é uma mistura exótica. 🧬💻
-                    </p>
-                    <p>
-                        Troquei o microscópio pelo VS Code quando percebi que a programação me permitia "diagnosticar" e resolver problemas numa escala muito maior. Eu não queria apenas analisar um paciente por vez; eu queria construir os sistemas que ajudam milhares.
-                    </p>
-                    <p>
-                        Hoje, uso minha bagagem analítica (e aquela obsessão por detalhes da área clínica) para escrever códigos limpos e criar arquiteturas robustas. Seja detectando arritmias com IA ou otimizando a logística de empresas, meu objetivo é um só: usar tecnologia para descomplicar a vida real. 
-                    </p>
-                    <p style="font-size: 0.95rem; font-style: italic; opacity: 0.8;">
-                        (E claro, tomar um bom café enquanto o código compila ☕).
-                    </p>
+                    <p><strong>"De Biomédica a Dev?"</strong> Sim, é uma mistura exótica. 🧬💻</p>
+                    <p>Troquei o microscópio pelo VS Code quando percebi que a programação me permitia "diagnosticar" e resolver problemas numa escala muito maior. Eu não queria apenas analisar um paciente por vez; eu queria construir os sistemas que ajudam milhares.</p>
+                    <p>Hoje, uso minha bagagem analítica (e aquela obsessão por detalhes da área clínica) para escrever códigos limpos e criar arquiteturas robustas. Seja detectando arritmias com IA ou otimizando a logística de empresas, meu objetivo é um só: usar tecnologia para descomplicar a vida real.</p>
+                    <p style="font-size: 0.95rem; font-style: italic; opacity: 0.8;">(E claro, tomar um bom café enquanto o código compila ☕).</p>
                 </div>
             </div>
         </section>
 
         <h2 class="section-header reveal">Inovação & Sistemas Complexos</h2>
         <div class="projects-grid">
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-heartbeat"></i></div>
                 <div class="card-content">
@@ -263,7 +238,6 @@
                     <a href="#" class="btn-link">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-route"></i></div>
                 <div class="card-content">
@@ -273,7 +247,6 @@
                     <a href="#" class="btn-link">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-leaf"></i></div>
                 <div class="card-content">
@@ -283,7 +256,6 @@
                     <a href="#" class="btn-link">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-brain"></i></div>
                 <div class="card-content">
@@ -293,7 +265,6 @@
                     <a href="#" class="btn-link">Ver Case Study</a>
                 </div>
             </div>
-
              <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-calendar-alt"></i></div>
                 <div class="card-content">
@@ -303,7 +274,6 @@
                     <a href="#" class="btn-link">Ver Case Study</a>
                 </div>
             </div>
-
             <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-fingerprint"></i></div>
                 <div class="card-content">
@@ -313,60 +283,42 @@
                     <a href="#" class="btn-link">Ver Case Study</a>
                 </div>
             </div>
-
         </div>
 
         <h2 class="section-header reveal">Laboratório de Engenharia</h2>
         <div class="opensource-list reveal">
-            
             <div class="os-card">
-                <h4>TechBank</h4>
-                <span>Java • Spring Boot</span>
-                <p>Backend bancário robusto com autenticação e transações seguras.</p>
+                <h4>TechBank</h4><span>Java • Spring Boot</span>
+                <p>Backend bancário robusto com autenticação.</p>
             </div>
-
             <div class="os-card">
-                <h4>Auction House System</h4>
-                <span>WebSockets • Java</span>
-                <p>Sistema de leilões em tempo real de alta performance.</p>
+                <h4>Auction House</h4><span>WebSockets • Java</span>
+                <p>Sistema de leilões em tempo real.</p>
             </div>
-
             <div class="os-card">
-                <h4>Alchemist's Duel</h4>
-                <span>Game Dev • Python</span>
-                <p>Jogo de estratégia complexo focado em lógica de objetos.</p>
+                <h4>Alchemist's Duel</h4><span>Game Dev • Python</span>
+                <p>Jogo de estratégia focado em lógica de objetos.</p>
             </div>
-
             <div class="os-card">
-                <h4>Adaptive Chess AI</h4>
-                <span>Algoritmos • IA</span>
-                <p>Engine de xadrez que aprende e se adapta ao jogador.</p>
+                <h4>Adaptive Chess AI</h4><span>Algoritmos • IA</span>
+                <p>Engine de xadrez que aprende com o jogador.</p>
             </div>
-
             <div class="os-card">
-                <h4>HealthMetric Hub</h4>
-                <span>FHIR • Padrões Médicos</span>
-                <p>Hub de interoperabilidade para dados hospitalares.</p>
+                <h4>HealthMetric Hub</h4><span>FHIR • Padrões</span>
+                <p>Hub de interoperabilidade hospitalar.</p>
             </div>
-
             <div class="os-card">
-                <h4>NLP Spam Classifier</h4>
-                <span>Machine Learning</span>
-                <p>Filtro inteligente de mensagens indesejadas.</p>
+                <h4>NLP Spam Classifier</h4><span>Machine Learning</span>
+                <p>Filtro inteligente de mensagens.</p>
             </div>
-
             <div class="os-card">
-                <h4>Pentest Lab</h4>
-                <span>Kali Linux • Security</span>
-                <p>Ambiente controlado para testes de invasão e defesa.</p>
+                <h4>Pentest Lab</h4><span>Kali Linux • Security</span>
+                <p>Ambiente para testes de invasão.</p>
             </div>
-
             <div class="os-card">
-                <h4>Conecta Idoso</h4>
-                <span>Web • Acessibilidade</span>
-                <p>Plataforma de inclusão digital com UX adaptada.</p>
+                <h4>Conecta Idoso</h4><span>Web • Acessibilidade</span>
+                <p>Plataforma de inclusão digital.</p>
             </div>
-
         </div>
 
         <footer>
@@ -381,23 +333,38 @@
     </div>
 
     <script>
-        // DARK/LIGHT MODE
+        // LÓGICA DO TEMA (DARK / LIGHT)
         const toggleButton = document.getElementById('theme-toggle');
-        const body = document.body;
         const icon = toggleButton.querySelector('i');
+        const html = document.documentElement;
+
+        // Verifica se o usuário já tem uma preferência salva
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        }
 
         toggleButton.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            if (body.classList.contains('light-mode')) {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme); // Salva a escolha
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'light') {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
             } else {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
             }
-        });
+        }
 
-        // SCROLL REVEAL
+        // ANIMAÇÃO SCROLL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
