@@ -30,16 +30,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
       body {
-            /* Fundo base */
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 0%, rgba(40, 44, 52, 1) 0%, rgba(15, 17, 21, 1) 80%);
-            background-attachment: fixed; 
+            background-image: radial-gradient(circle at 50% 0%, #1a1d26 0%, #0f1115 100%);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             padding: 0 20px;
             overflow-x: hidden;
-            transition: background-color 0.3s, color 0.3s, background-image 0.3s;
+            min-height: 100vh;
         }
         
         body.light-mode {
