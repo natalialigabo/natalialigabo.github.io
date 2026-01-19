@@ -4,39 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Natalia Ligabo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #27ae60;
-            --text-color: #333;
-            --bg-color: #f4f4f4;
+            --primary-color: #0d1117; /* Fundo escuro estilo GitHub Dark */
+            --secondary-color: #161b22; /* Fundo dos cards */
+            --accent-color: #238636;  /* Verde do GitHub */
+            --text-color: #c9d1d9;
+            --title-color: #ffffff;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; color: var(--text-color); background-color: var(--bg-color); }
-        header { background: var(--primary-color); color: #fff; padding: 3rem 0; text-align: center; }
-        header h1 { margin: 0; font-size: 2.8rem; }
-        header p { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.6; margin: 0; color: var(--text-color); background-color: var(--primary-color); }
+        
+        header { background: var(--secondary-color); padding: 4rem 0; text-align: center; border-bottom: 1px solid #30363d; }
+        header h1 { margin: 0; font-size: 3rem; color: var(--title-color); }
+        header p { font-size: 1.2rem; color: #8b949e; margin-top: 10px; }
         
         .container { max-width: 1000px; margin: auto; padding: 20px; }
         
-        .section-title { border-bottom: 3px solid var(--accent-color); padding-bottom: 10px; margin-top: 60px; color: var(--primary-color); font-size: 1.8rem; }
+        .section-title { border-bottom: 2px solid #30363d; padding-bottom: 10px; margin-top: 60px; color: var(--title-color); font-size: 2rem; }
         
-        /* Grid para os projetos */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        /* Grid de Projetos */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
         
-        .project-card { background: white; border-radius: 10px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease; border-top: 5px solid var(--accent-color); display: flex; flex-direction: column; justify-content: space-between; }
-        .project-card:hover { transform: translateY(-5px); }
+        .project-card { background: var(--secondary-color); border: 1px solid #30363d; border-radius: 6px; padding: 20px; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .project-card:hover { transform: translateY(-5px); border-color: #8b949e; }
         
-        .project-card h3 { margin-top: 0; color: var(--primary-color); }
-        .tags { margin: 15px 0; }
-        .tags span { background: #eef2f5; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; margin-right: 5px; color: #555; font-weight: 600; display: inline-block; margin-bottom: 5px;}
+        .project-card h3 { margin-top: 0; color: #58a6ff; } /* Azul suave */
+        .project-card p { font-size: 0.95rem; margin-bottom: 15px; }
         
-        a { color: var(--accent-color); text-decoration: none; font-weight: bold; }
-        .btn { display: inline-block; background: var(--accent-color); color: white; padding: 10px 20px; border-radius: 5px; text-align: center; margin-top: 15px; transition: background 0.3s; }
-        .btn:hover { background: #219150; color: white; text-decoration: none; }
+        .tags { margin-bottom: 15px; }
+        .tags span { background: rgba(56, 139, 253, 0.15); color: #58a6ff; padding: 2px 10px; border-radius: 2em; font-size: 0.75rem; margin-right: 5px; font-weight: 600; display: inline-block; margin-bottom: 5px; border: 1px solid rgba(56, 139, 253, 0.4); }
+        
+        .btn { display: inline-block; background: var(--accent-color); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-align: center; border: 1px solid rgba(240, 246, 252, 0.1); }
+        .btn:hover { background: #2ea043; }
 
-        footer { text-align: center; padding: 40px; background: var(--primary-color); color: white; margin-top: 80px; }
-        .social-links { margin-top: 20px; }
-        .social-links a { color: white; margin: 0 10px; font-size: 1.1rem; }
+        footer { text-align: center; padding: 40px; margin-top: 80px; border-top: 1px solid #30363d; color: #8b949e; }
+        .social-links a { color: #58a6ff; margin: 0 10px; text-decoration: none; font-size: 1.5rem; }
+        .social-links a:hover { color: var(--title-color); }
     </style>
 </head>
 <body>
@@ -44,8 +48,8 @@
     <header>
         <div class="container">
             <h1>Natalia Ligabo</h1>
-            <p>Biomedicina & Engenharia da Computação</p>
-            <p><i>Desenvolvendo tecnologia para impacto social e saúde (HealthTech).</i></p>
+            <p>Biomedical Scientist & Computer Engineering Student</p>
+            <p style="font-size: 1rem; color: #8b949e;"><i>HealthTech | Data Science | Social Impact</i></p>
         </div>
     </header>
 
@@ -54,85 +58,85 @@
         <section id="sobre">
             <h2 class="section-title">Sobre Mim</h2>
             <p>
-                De analista clínica a engenheira de software. Unindo minha formação em <strong>Biomedicina</strong> com a <strong>Engenharia da Computação</strong>, meu objetivo é criar soluções tecnológicas que salvem vidas e reduzam desigualdades. Tenho foco em Inteligência Artificial, IoMT (Internet das Coisas Médicas) e Segurança da Informação.
+                Transitando da <strong>Biomedicina</strong> para a <strong>Engenharia da Computação</strong>, trago uma visão única: o rigor científico da saúde combinado com a capacidade de criar soluções de software escaláveis. Meu foco atual é desenvolver tecnologias que impactem positivamente a sociedade, utilizando Inteligência Artificial, Análise de Dados e IoMT.
             </p>
         </section>
 
         <section id="projetos">
-            <h2 class="section-title">Portfólio de Projetos</h2>
+            <h2 class="section-title">Projetos Selecionados</h2>
             
             <div class="projects-grid">
                 
                 <div class="project-card">
                     <div>
                         <h3>🫀 HeartGuard</h3>
-                        <p>Dispositivo IoMT para monitoramento cardíaco remoto. Utiliza CNNs para detectar arritmias em tempo real e alertar médicos.</p>
+                        <p>Solução de IoMT para monitoramento cardíaco. Utiliza CNNs (Redes Neurais) treinadas para identificar arritmias em sinais de ECG em tempo real.</p>
                         <div class="tags"><span>Python</span> <span>TensorFlow</span> <span>IoMT</span></div>
                     </div>
-                    <a href="https://github.com/natalialigabo" class="btn">Ver Código</a>
+                    <a href="https://github.com/natalialigabo" class="btn"><i class="fab fa-github"></i> Ver Código</a>
                 </div>
 
                 <div class="project-card">
                     <div>
                         <h3>🌱 Projeto Amana</h3>
-                        <p>Solução tecnológica voltada para o setor agro/ambiental, focada em otimização de recursos e monitoramento sustentável.</p>
-                        <div class="tags"><span>AgroTech</span> <span>Dados</span> <span>Sustentabilidade</span></div>
+                        <p>Tecnologia agro-ambiental focada em sustentabilidade. Monitoramento inteligente de recursos para otimizar a produção e reduzir impacto.</p>
+                        <div class="tags"><span>AgroTech</span> <span>Data Analysis</span> <span>Green Tech</span></div>
                     </div>
-                    <a href="https://github.com/natalialigabo" class="btn">Ver Código</a>
+                    <a href="https://github.com/natalialigabo" class="btn"><i class="fab fa-github"></i> Ver Código</a>
                 </div>
 
                 <div class="project-card">
                     <div>
                         <h3>👩‍⚕️ Projeto Hera</h3>
-                        <p>Aplicação focada na saúde e bem-estar, provendo ferramentas de acompanhamento e suporte preventivo.</p>
-                        <div class="tags"><span>HealthTech</span> <span>App</span> <span>Inclusão</span></div>
+                        <p>Plataforma dedicada à saúde da mulher, oferecendo ferramentas de rastreamento preventivo e suporte baseada em dados clínicos.</p>
+                        <div class="tags"><span>HealthTech</span> <span>Python</span> <span>Social</span></div>
                     </div>
-                    <a href="https://github.com/natalialigabo" class="btn">Ver Código</a>
+                    <a href="https://github.com/natalialigabo" class="btn"><i class="fab fa-github"></i> Ver Código</a>
                 </div>
 
                 <div class="project-card">
                     <div>
                         <h3>🏦 TechBank</h3>
-                        <p>Sistema bancário digital completo com backend robusto, simulando transações seguras, cadastro de clientes e extratos.</p>
-                        <div class="tags"><span>Java/Python</span> <span>Backend</span> <span>Fintech</span></div>
+                        <p>Backend robusto para um banco digital. Simula transações seguras, autenticação e gestão de contas com arquitetura escalável.</p>
+                        <div class="tags"><span>Java</span> <span>Spring Boot</span> <span>Fintech</span></div>
                     </div>
-                    <a href="https://github.com/natalialigabo" class="btn">Ver Código</a>
+                    <a href="https://github.com/natalialigabo" class="btn"><i class="fab fa-github"></i> Ver Código</a>
                 </div>
 
                 <div class="project-card">
                     <div>
                         <h3>🌍 EcoShield</h3>
-                        <p>Plataforma de prevenção de desastres ambientais, integrando alertas climáticos para comunidades vulneráveis.</p>
-                        <div class="tags"><span>Social</span> <span>Geoespacial</span> <span>Web</span></div>
+                        <p>Sistema de alerta e prevenção de desastres. Cruza dados climáticos para notificar comunidades em áreas de risco.</p>
+                        <div class="tags"><span>GeoSpatial</span> <span>API Integration</span> <span>Social Impact</span></div>
                     </div>
-                    <a href="https://github.com/natalialigabo" class="btn">Ver Código</a>
+                    <a href="https://github.com/natalialigabo" class="btn"><i class="fab fa-github"></i> Ver Código</a>
                 </div>
 
                 <div class="project-card">
                     <div>
                         <h3>🔒 Lab de Pentest</h3>
-                        <p>Ambiente de estudos em Cibersegurança configurado com Kali Linux e DVWA para prática de Ethical Hacking.</p>
-                        <div class="tags"><span>Linux</span> <span>Security</span> <span>Ethical Hacking</span></div>
+                        <p>Ambiente controlado para estudos de Cibersegurança, utilizando Kali Linux e DVWA para explorar vulnerabilidades web.</p>
+                        <div class="tags"><span>Linux</span> <span>Ethical Hacking</span> <span>Security</span></div>
                     </div>
-                    <a href="https://github.com/natalialigabo" class="btn">Ver Código</a>
+                    <a href="https://github.com/natalialigabo" class="btn"><i class="fab fa-github"></i> Ver Código</a>
                 </div>
 
             </div>
         </section>
 
         <section id="contato">
-            <h2 class="section-title">Vamos conversar?</h2>
-            <p>Estou disponível para projetos e oportunidades em Data Science e Desenvolvimento.</p>
+            <h2 class="section-title">Contato</h2>
+            <p>Estou aberta a colaborações em projetos Open Source e oportunidades de estágio.</p>
             <div class="social-links">
-                <a href="https://github.com/natalialigabo">GitHub</a> |
-                <a href="https://www.linkedin.com/in/natalialigabo/">LinkedIn</a> |
-                <a href="mailto:seuemail@exemplo.com">Email</a>
+                <a href="https://github.com/natalialigabo"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/natalialigabo/"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:natalialigabo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2026 Natalia Ligabo. Construído com 💻 e ☕.</p>
+        <p>&copy; 2026 Natalia Ligabo.</p>
     </footer>
 
 </body>
