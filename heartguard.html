@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: HeartGuard | Natalia Ligabo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- MANTER A IDENTIDADE VISUAL DO PORTFOLIO --- */
+        :root {
+            --bg-color: #0f1115;      
+            --bg-gradient: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
+            --text-main: #ffffff;     
+            --text-muted: #9ca3af;    
+            --accent: #d4b2d8;        
+            --card-bg: #161b22;       
+            --border: #333;           
+            --shadow: none;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f9fafb;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #f3f4f6 80%);
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --accent: #7c3aed;
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8; /* Leitura mais confortável */
+            padding: 0 20px;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; position: relative; }
+
+        /* --- BOTÃO VOLTAR --- */
+        .back-nav {
+            padding: 40px 0;
+        }
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        /* --- HEADER DO ARTIGO --- */
+        .article-header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        .article-tag {
+            display: inline-block;
+            background: rgba(212, 178, 216, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent);
+        }
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CONTEÚDO --- */
+        section { margin-bottom: 80px; }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text-main);
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+        }
+
+        h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-main); margin-top: 30px;}
+        p { margin-bottom: 20px; color: var(--text-muted); font-size: 1.1rem; }
+
+        /* --- CARD PERSONA --- */
+        .persona-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+        .persona-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            background: rgba(255,255,255,0.05);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .persona-data ul { list-style: none; }
+        .persona-data li { margin-bottom: 10px; color: var(--text-muted); }
+        .persona-data strong { color: var(--text-main); }
+
+        /* --- TIMELINE DE PROCESSAMENTO (IA) --- */
+        .process-step {
+            border-left: 2px solid var(--border);
+            padding-left: 30px;
+            padding-bottom: 30px;
+            position: relative;
+        }
+        .process-step::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: var(--bg-color);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: absolute;
+            left: -9px;
+            top: 0;
+        }
+        .process-step:last-child { border-left: none; }
+        .step-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* --- MOCKUPS DE RESULTADO --- */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .device-mockup {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .screen-placeholder {
+            background: #222;
+            height: 250px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Simulação de alerta vermelho */
+        .alert-screen {
+            background: rgba(220, 38, 38, 0.2);
+            border: 2px solid #ef4444;
+            color: #ef4444;
+            flex-direction: column;
+        }
+
+        /* --- CONCLUSÃO --- */
+        .conclusion-box {
+            background: linear-gradient(135deg, rgba(212, 178, 216, 0.1), transparent);
+            border: 1px solid var(--accent);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .conclusion-box p { font-size: 1.25rem; font-style: italic; color: var(--text-main); }
+
+        /* --- BOTÃO TEMA --- */
+        .theme-toggle {
+            position: fixed; top: 25px; right: 25px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            color: var(--text-main); width: 45px; height: 45px;
+            border-radius: 50%; cursor: pointer; z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* ANIMAÇÃO */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 2.2rem; }
+            .persona-card { flex-direction: column; text-align: center; }
+            .results-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+
+    <div class="container">
+        
+        <nav class="back-nav">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Voltar para Portfolio</a>
+        </nav>
+
+        <header class="article-header reveal">
+            <span class="article-tag">Estudo de Caso • IoMT</span>
+            <h1 class="article-title">HeartGuard em Ação</h1>
+            <p class="article-subtitle">
+                Monitoramento Multimodal de Paciente com Cardiopatia Chagásica Crônica e Comorbidades.
+            </p>
+        </header>
+
+        <section class="reveal">
+            <h2>1. O Perfil do Paciente (A Persona)</h2>
+            <p>Para provar a robustez do sistema, escolhemos um perfil de alto risco e complexidade médica real.</p>
+            
+            <div class="persona-card">
+                <div class="persona-icon"><i class="fas fa-user-injured"></i></div>
+                <div class="persona-data">
+                    <h3>Dona Maria de Lourdes</h3>
+                    <ul>
+                        <li><strong>Idade:</strong> 72 anos</li>
+                        <li><strong>Histórico:</strong> Ex-moradora de zona rural (Endêmica para Chagas).</li>
+                        <li><strong>Condições:</strong> Hipertensa (20 anos) e DPOC (uso de fogão a lenha).</li>
+                        <li><strong>Nota:</strong> Não diabética. Alto risco cardíaco.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>2. Configuração Inteligente</h2>
+            <p>
+                O diferencial do HeartGuard começa antes mesmo do monitoramento. Ao configurar o dispositivo, o sistema adapta seus limiares à realidade do paciente para evitar falsos positivos.
+            </p>
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
+                <h4 style="color: #10b981; margin-bottom: 10px;">⚙️ A Lógica de Calibração:</h4>
+                <p style="font-size: 1rem; margin-bottom: 0;">
+                    Pacientes com DPOC saturam oxigênio abaixo do padrão. Um monitor comum apitaria erro com 92%.<br>
+                    <strong>Ação do HeartGuard:</strong> Baseline de SpO2 ajustada manualmente para <strong>89%</strong>, respeitando a individualidade de Dona Maria.
+                </p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>3. Cenário de Teste: "A Tarde de Domingo"</h2>
+            <p>
+                <strong>Situação:</strong> Dona Maria está em repouso vendo TV, mas esqueceu de tomar o remédio da pressão pela manhã. O dispositivo ESP32 capturou os seguintes dados brutos em tempo real:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                    <i class="fas fa-wave-square" style="color: var(--accent); font-size: 1.5rem;"></i>
+                    <p style="margin: 10px 0 0; color: #fff;">ECG Anômalo</p>
+                    <span style="font-size: 0.8rem;">Batida estranha detectada</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                    <i class="fas fa-heart" style="color: #ef4444; font-size: 1.5rem;"></i>
+                    <p style="margin: 10px 0 0; color: #fff;">92 BPM</p>
+                    <span style="font-size: 0.8rem;">Elevado para repouso</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                    <i class="fas fa-tachometer-alt" style="color: #f59e0b; font-size: 1.5rem;"></i>
+                    <p style="margin: 10px 0 0; color: #fff;">PA 160/100</p>
+                    <span style="font-size: 0.8rem;">Crise Hipertensiva</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                    <i class="fas fa-lungs" style="color: #3b82f6; font-size: 1.5rem;"></i>
+                    <p style="margin: 10px 0 0; color: #fff;">SpO2 88%</p>
+                    <span style="font-size: 0.8rem;">Baixo (mas esperado)</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>4. O Processamento da IA (A Caixa Preta)</h2>
+            <p>Como o Backend (Python/TensorFlow) processou esses dados em cascata para tomar a decisão:</p>
+
+            <div style="margin-top: 40px;">
+                <div class="process-step">
+                    <span class="step-label">Etapa 1: Visão Computacional (MIT-BIH)</span>
+                    <p>
+                        <strong>Entrada:</strong> Sinal de ECG bruto.<br>
+                        <strong>Análise:</strong> Modelo CNN detectou anomalia na forma da onda QRS.<br>
+                        <strong>Saída:</strong> Classe V (Contração Ventricular Prematura).<br>
+                        <em style="font-size: 0.9rem;">Ação: Como não é "Normal", aciona o especialista.</em>
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <span class="step-label">Etapa 2: O Especialista Regional (CODE-BR)</span>
+                    <p>
+                        <strong>Pergunta:</strong> "Essa arritmia ventricular tem padrão de Chagas?"<br>
+                        <strong>Análise:</strong> Identificou alargamento do QRS típico de fibrose miocárdica.<br>
+                        <strong>Saída:</strong> <span style="color: #ef4444;">Risco Chagásico Detectado.</span>
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <span class="step-label">Etapa 3: Análise Clínica (Random Forest)</span>
+                    <p>
+                        <strong>Raciocínio da IA:</strong> "A arritmia já é ruim (Chagas). Somada à idade (72) e à pressão alta (160/100), o risco de evento fatal é iminente."<br>
+                        <strong>Decisão:</strong> Elevar prioridade para <strong>RISCO CRÍTICO (Classe 2)</strong>.
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <span class="step-label">Etapa 4: Filtro de Falso Positivo</span>
+                    <p>
+                        <strong>Lógica SpO2:</strong> Valor lido 88% vs Alvo 89%.<br>
+                        <strong>Decisão:</strong> Diferença marginal. Devido ao histórico de DPOC, <strong>NÃO</strong> disparar alerta de hipóxia isolado.<br>
+                        <em style="color: #10b981;">Resultado: Pânico desnecessário evitado.</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>5. Resultados Apresentados</h2>
+            
+            <div class="results-grid">
+                <div class="device-mockup">
+                    <h4>📱 App Android (Família)</h4>
+                    <div class="screen-placeholder alert-screen">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                        <strong>STATUS: CRÍTICO</strong>
+                        <span style="font-size: 0.8rem; padding: 0 20px;">Arritmia Ventricular (Padrão Chagásico) + Crise Hipertensiva</span>
+                    </div>
+                    <p style="font-size: 0.9rem;">
+                        Mapa de Calor (Grad-CAM) exibe a onda "V" em vermelho, mostrando onde ocorreu a falha elétrica.
+                    </p>
+                </div>
+
+                <div class="device-mockup">
+                    <h4>⌚ Smartwatch (Paciente)</h4>
+                    <div class="screen-placeholder alert-screen" style="justify-content: center;">
+                        <span style="font-size: 2rem; animation: blink 1s infinite;">⚠️</span>
+                        <strong>ALERTA CARDÍACO</strong>
+                        <span>Sente-se e peça ajuda.</span>
+                    </div>
+                    <p style="font-size: 0.9rem;">
+                        Vibração contínua e tela piscante para garantir que Dona Maria perceba o alerta.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <div class="conclusion-box">
+                <i class="fas fa-quote-left" style="color: var(--accent); font-size: 2rem; margin-bottom: 20px;"></i>
+                <p>
+                    "O HeartGuard demonstrou superioridade ao cruzar o dado da imagem (Chagas) com o dado clínico (Hipertensão), elevando a prioridade para Crítico e potencialmente salvando a vida da paciente, ao mesmo tempo que ignorou a saturação baixa normal para DPOC."
+                </p>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 50px;">
+            <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 Natalia Ligabo. HeartGuard Case Study.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // DARK/LIGHT MODE
+        const toggleButton = document.getElementById('theme-toggle');
+        const icon = toggleButton.querySelector('i');
+        const html = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        }
+
+        toggleButton.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'light') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // ANIMAÇÃO
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 50;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+    
+    <style>
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+
+</body>
+</html>
