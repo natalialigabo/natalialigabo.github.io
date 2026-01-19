@@ -4,30 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Natalia Ligabo | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- VARIÁVEIS DE CORES (TEMA PADRÃO: DARK) --- */
+        /* --- CONFIGURAÇÕES GERAIS --- */
         :root {
             --bg-color: #0f1115;
             --text-main: #ffffff;
             --text-muted: #9ca3af;
-            --accent: #d4b2d8; /* Lilás suave */
+            --accent: #d4b2d8;
             --card-bg: #161b22;
-            --border-color: #333;
-            --shadow: rgba(0,0,0,0.2);
-        }
-
-        /* --- TEMA CLARO (ATIVADO VIA JS) --- */
-        body.light-mode {
-            --bg-color: #f9fafb;
-            --text-main: #111827;
-            --text-muted: #4b5563;
-            --accent: #9333ea; /* Roxo mais forte para contraste */
-            --card-bg: #ffffff;
-            --border-color: #e5e7eb;
-            --shadow: rgba(0,0,0,0.05);
+            --border: #333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,188 +26,170 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             padding: 0 20px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden; /* Evita rolagem lateral nas animações */
         }
 
-        .container { max-width: 1000px; margin: 0 auto; position: relative; }
+        .container { max-width: 1100px; margin: 0 auto; }
 
-        /* --- BOTÃO DE TEMA --- */
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 0;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            z-index: 100;
+        /* --- ANIMAÇÃO DE SCROLL (REVEAL) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
         }
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: rotate(15deg);
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* --- HEADER COM FOTO --- */
+        /* --- HEADER & HERO --- */
         header {
-            padding: 120px 0 80px;
-            border-bottom: 1px solid var(--border-color);
+            min-height: 90vh; /* Ocupa a tela quase toda */
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 40px;
+            padding-bottom: 50px;
         }
 
-        .header-content { flex: 1; }
-
-        .intro-label {
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 15px;
-            display: block;
-            font-weight: 600;
-        }
-
-        h1 {
+        .hero-text h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 4rem;
             line-height: 1.1;
-            margin-bottom: 30px;
-            font-weight: 400;
+            margin-bottom: 20px;
         }
 
-        .bio {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 500px;
+        .hero-text .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        /* Estilo da Imagem de Perfil */
-        .header-image {
-            flex: 1;
-            max-width: 400px;
-            display: flex;
-            justify-content: center;
+        .hero-image img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 50px rgba(212, 178, 216, 0.1);
         }
 
-        .header-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 24px; /* Bordas arredondadas modernas */
-            box-shadow: 20px 20px 0px var(--accent); /* Efeito de sombra sólida */
-            filter: grayscale(20%); /* Um toque elegante */
-            transition: all 0.3s ease;
-        }
-        .header-image img:hover {
-            filter: grayscale(0%);
-            transform: translate(-5px, -5px);
-            box-shadow: 25px 25px 0px var(--accent);
+        /* --- SEÇÃO SOBRE MIM (COM EFEITO) --- */
+        .about-section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 80px;
         }
 
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
 
-        /* --- SEÇÕES E CARDS --- */
-        .section-header {
-            margin-top: 80px;
-            margin-bottom: 40px;
+        .about-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            color: var(--accent);
         }
 
-        .project-list { display: flex; flex-direction: column; gap: 30px; }
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
 
-        .project-item {
+        /* --- GRID DE PROJETOS (ESTILO BLOG) --- */
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        /* Card Estilo Blog */
+        .blog-card {
             background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
         }
 
-        .project-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px var(--shadow);
-        }
+        .blog-card:hover { transform: translateY(-10px); border-color: var(--accent); }
 
-        .project-meta {
+        .card-image {
+            height: 200px;
+            background: #252a33;
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent);
+            position: relative;
         }
+        /* Se você tiver prints, pode usar <img> aqui dentro depois */
 
-        .project-category {
-            font-size: 0.85rem;
+        .card-content { padding: 30px; }
+
+        .card-meta {
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
-            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-        .status-private { background: rgba(212, 178, 216, 0.1); color: var(--accent); border: 1px solid var(--accent); }
-        .status-public { background: rgba(110, 231, 183, 0.1); color: #10b981; border: 1px solid #10b981; }
-        body.light-mode .status-public { color: #059669; border-color: #059669; }
+        .card-title { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
 
-        .project-title { font-size: 2rem; margin-bottom: 15px; color: var(--text-main); }
-        .project-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
-
-        .tech-stack span {
-            display: inline-block;
-            margin-right: 15px;
-            font-size: 0.9rem;
-            color: var(--text-main);
-            font-family: 'Courier New', monospace;
-            background: var(--bg-color);
-            padding: 2px 8px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .action-link {
+        .btn-link {
             text-decoration: none;
-            color: var(--text-main);
+            color: #fff;
             font-weight: 600;
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 1px solid var(--accent);
             padding-bottom: 2px;
             transition: color 0.3s;
         }
-        .action-link:hover { color: var(--accent); background: var(--accent); color: white; padding: 2px 5px; }
+        .btn-link:hover { color: var(--accent); }
 
-        /* RODAPÉ */
-        footer {
-            margin-top: 100px;
-            padding: 50px 0;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: var(--text-muted);
+        /* --- LISTA OPEN SOURCE (MAIS COMPACTA) --- */
+        .opensource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
-        .social-links a {
-            color: var(--text-main);
-            margin: 0 15px;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .social-links a:hover { color: var(--accent); }
 
-        /* Responsividade para Celular */
-        @media (max-width: 900px) {
-            header { flex-direction: column-reverse; text-align: center; padding-top: 80px; }
-            h1 { font-size: 2.8rem; }
-            .header-image { max-width: 300px; margin-bottom: 30px; }
-            .bio { margin: 0 auto; }
-            .theme-toggle { top: 10px; right: 10px; }
+        .os-card {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .os-card h4 { color: #fff; margin-bottom: 5px; }
+        .os-card span { font-size: 0.8rem; color: var(--accent); }
+
+        /* --- FOOTER --- */
+        footer { padding: 50px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 80px; }
+        .social-links a { color: #fff; margin: 0 15px; font-size: 1.5rem; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column-reverse; text-align: center; justify-content: center; }
+            .hero-text h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero-image img { width: 250px; height: 250px; margin-bottom: 30px; }
         }
     </style>
 </head>
@@ -227,92 +197,182 @@
 
     <div class="container">
         
-        <button class="theme-toggle" id="theme-toggle" aria-label="Mudar Tema">
-            <i class="fas fa-moon"></i>
-        </button>
-
         <header>
-            <div class="header-content">
-                <span class="intro-label">Natalia Ligabo</span>
-                <h1>Biomedical Scientist & <br> Software Engineer.</h1>
-                <p class="bio">
-                    Unindo neurociência, dados clínicos e engenharia de software para criar a próxima geração de <b>HealthTechs</b> e soluções de alto impacto.
+            <div class="hero-text reveal">
+                <span class="subtitle">Biomedical Scientist & Dev</span>
+                <h1>Natalia Ligabo</h1>
+                <p style="font-size: 1.2rem; color: #9ca3af; max-width: 500px;">
+                    Unindo neurociência e código para construir o futuro da HealthTech.
                 </p>
             </div>
-            
-            <div class="header-image">
-                <img src="avatar.jpg" alt="Ilustração de Natalia Ligabo" style="border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);">
+            <div class="hero-image reveal">
+                <img src="avatar.jpg" alt="Natalia Ligabo">
             </div>
         </header>
 
-        <h2 class="section-header">Proprietary Innovation</h2>
-        <div class="project-list">
-            
-            <div class="project-item">
-                <div class="project-meta">
-                    <span class="project-category">IoMT • Cardiology</span>
-                    <span class="status-badge status-private"><i class="fas fa-lock"></i> Proprietary Core</span>
+        <section class="about-section reveal">
+            <div class="about-grid">
+                <div class="about-title">
+                    About<br>My Journey
                 </div>
-                <h3 class="project-title">HeartGuard</h3>
-                <p class="project-desc">
-                    Sistema avançado de monitoramento cardíaco que utiliza CNNs (Redes Neurais Convolucionais) para detectar arritmias complexas em tempo real com 99% de acurácia.
-                </p>
-                <div class="tech-stack">
-                    <span>Python</span> <span>TensorFlow</span> <span>Edge AI</span>
+                <div class="about-text">
+                    <p>
+                        Minha trajetória não é linear, e essa é minha maior força. Comecei nos laboratórios clínicos, analisando a vida através de microscópios e dados biológicos. Lá, entendi a importância da precisão e do impacto humano.
+                    </p>
+                    <p>
+                        Ao migrar para a <strong>Engenharia da Computação</strong>, percebi que poderia escalar esse impacto. Hoje, não analiso apenas um paciente por vez, mas crio algoritmos (HeartGuard, Artemis) capazes de monitorar milhares.
+                    </p>
+                    <p>
+                        Meu foco é claro: usar Inteligência Artificial não apenas como ferramenta, mas como uma extensão do cuidado médico e da segurança social.
+                    </p>
                 </div>
-                <span style="color: var(--text-muted); font-size: 0.9rem;">*Case Study disponível mediante solicitação.</span>
+            </div>
+        </section>
+
+        <h2 class="section-header reveal">Proprietary Innovation</h2>
+        <div class="projects-grid">
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-heartbeat"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">IoMT • Cardiology</span>
+                    <h3 class="card-title">HeartGuard</h3>
+                    <p class="card-desc">Sistema de monitoramento cardíaco via IoT com IA de 99% de acurácia na detecção de arritmias.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
 
-            <div class="project-item">
-                <div class="project-meta">
-                    <span class="project-category">Logistics • B2B Sales</span>
-                    <span class="status-badge status-private"><i class="fas fa-lock"></i> Proprietary B2B</span>
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-route"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Logistics • B2B</span>
+                    <h3 class="card-title">Projeto Hera</h3>
+                    <p class="card-desc">Plataforma inspirada nos "12 Trabalhos" para resolver desafios complexos de logística e vendas.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <h3 class="project-title">Projeto Hera</h3>
-                <p class="project-desc">
-                    Plataforma de inteligência comercial e logística. Inspirado nos "12 Trabalhos", o sistema resolve desafios complexos de prospecção de leads e otimização de rotas em larga escala.
-                </p>
-                <div class="tech-stack">
-                    <span>Data Mining</span> <span>Optimization Algos</span> <span>Python</span>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-eye"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Computer Vision • Hospital</span>
+                    <h3 class="card-title">Artemis Vision</h3>
+                    <p class="card-desc">IA para detecção visual de piora clínica em pacientes aguardando em filas de emergência.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <span style="color: var(--text-muted); font-size: 0.9rem;">*Focado em eficiência operacional corporativa.</span>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-leaf"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">AgroTech • Sustainability</span>
+                    <h3 class="card-title">Projeto Amana</h3>
+                    <p class="card-desc">Monitoramento inteligente de recursos hídricos para agricultura sustentável.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-fingerprint"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Forensics • AI Security</span>
+                    <h3 class="card-title">Deepfake Hunter</h3>
+                    <p class="card-desc">Algoritmo para identificar manipulação facial e micro-expressões em vídeos digitais.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-brain"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">EdTech • Knowledge</span>
+                    <h3 class="card-title">Projeto Athena</h3>
+                    <p class="card-desc">Sistema de gestão de conhecimento adaptativo focado em otimização de aprendizado.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-brain"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Neuroscience • BCI (Brain-Computer Interface)</span>
+                    <h3 class="card-title">Motor Imagery EEG Classifier</h3>
+                    <p class="card-desc">
+                        Sistema de interpretação de sinais eletroencefalográficos (EEG). Utiliza Machine Learning para classificar padrões de "imaginação motora", permitindo comandos mentais para interfaces assistivas.
+                    </p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-file-medical-alt"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Health Data Standards • IoT</span>
+                    <h3 class="card-title">HealthMetric Hub (FHIR)</h3>
+                    <p class="card-desc">
+                        Hub de interoperabilidade para dispositivos IoT médicos. Implementa o padrão internacional HL7 FHIR para garantir que dados de wearables sejam aceitos em sistemas hospitalares.
+                    </p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-calendar-alt" style="color: #f472b6;"></i></div> <div class="card-content">
+                    <span class="card-meta">Social Impact • Security</span>
+                    <h3 class="card-title">MyCalendar (SOS)</h3>
+                    <p class="card-desc">
+                        Aplicativo camuflado de calendário menstrual que funciona como botão de pânico oculto. Envia localização e áudio em tempo real para contatos de emergência em situações de violência doméstica.
+                    </p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
 
         </div>
 
-        <h2 class="section-header">Engineering Labs (Open Source)</h2>
-        <div class="project-list">
-
-            <div class="project-item">
-                <div class="project-meta">
-                    <span class="project-category">Game Dev • OOP Logic</span>
-                    <span class="status-badge status-public"><i class="fab fa-github"></i> Code Available</span>
-                </div>
-                <h3 class="project-title">The Alchemist's Duel</h3>
-                <p class="project-desc">
-                    Jogo de estratégia complexo baseado em combinação de elementos e classes. Demonstra domínio de Programação Orientada a Objetos e lógica de estado de jogo.
-                </p>
-                <div class="tech-stack">
-                    <span>Java/Python</span> <span>OOP Patterns</span>
-                </div>
-                <a href="https://github.com/natalialigabo" class="action-link">Ver Código <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <div class="project-item">
-                <div class="project-meta">
-                    <span class="project-category">AI Algorithms</span>
-                    <span class="status-badge status-public"><i class="fab fa-github"></i> Code Available</span>
-                </div>
-                <h3 class="project-title">Adaptive Chess Engine</h3>
-                <p class="project-desc">
-                    Motor de xadrez que analisa o padrão de jogo do oponente em tempo real para ajustar dinamicamente a dificuldade da IA.
-                </p>
-                <div class="tech-stack">
-                    <span>Minimax</span> <span>Heuristic Analysis</span>
-                </div>
-                <a href="https://github.com/natalialigabo" class="action-link">Ver Código <i class="fas fa-arrow-right"></i></a>
-            </div>
+        <h2 class="section-header reveal">Open Source Labs</h2>
+        <div class="opensource-list reveal">
             
+            <div class="os-card">
+                <h4>TechBank</h4>
+                <span>Java • Spring Boot</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Backend bancário robusto com auth.</p>
+            </div>
+
+            <div class="os-card">
+                <h4>Alchemist's Duel</h4>
+                <span>Python • Game Dev</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Jogo de estratégia e lógica de elementos.</p>
+            </div>
+
+            <div class="os-card">
+                <h4>EcoShield</h4>
+                <span>GeoSpatial • APIs</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Alertas de desastres climáticos.</p>
+            </div>
+
+            <div class="os-card">
+                <h4>Adaptive Chess</h4>
+                <span>Algorithms • Minimax</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Engine de xadrez que aprende com você.</p>
+            </div>
+
+            <div class="os-card">
+                <h4>Pentest Lab</h4>
+                <span>Kali Linux • Security</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Ambiente para Ethical Hacking.</p>
+            </div>
+
+            <div class="os-card">
+                <h4>My Calendar</h4>
+                <span>Web • Productivity</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Gestão de tempo inteligente.</p>
+            </div>
+
+            <div class="os-card">
+                <h4>Sentinela</h4>
+                <span>Monitoring • Python</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Script de vigilância de processos.</p>
+            </div>
+
         </div>
 
         <footer>
@@ -321,27 +381,57 @@
                 <a href="https://www.linkedin.com/in/natalialigabo/"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:natalialigabo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p style="margin-top: 20px;">© 2026 Natalia Ligabo. Built with code.</p>
+            <p style="margin-top: 20px;">© 2026 Natalia Ligabo.</p>
         </footer>
+        <div class="os-card">
+                <h4>Auction House System</h4>
+                <span>Java • WebSockets</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
+                    Backend de alta performance para leilões em tempo real, suportando milhares de lances simultâneos via WebSocket.
+                </p>
+            </div>
+
+            <div class="os-card">
+                <h4>NLP Spam Classifier</h4>
+                <span>Machine Learning • NLP</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
+                    Modelo de Inteligência Artificial treinado para filtrar e classificar e-mails como spam com alta precisão.
+                </p>
+            </div>
+
+            <div class="os-card">
+                <h4>Conecta Idoso</h4>
+                <span>Social • Accessibility</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
+                    Plataforma web com UX/UI adaptada para inclusão digital e social da terceira idade.
+                </p>
+            </div>
+
+            <div class="os-card">
+                <h4>Mood Music API</h4>
+                <span>API Rest • Backend</span>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
+                    API que recomenda playlists baseadas na análise de sentimento do usuário ou contexto atual.
+                </p>
+            </div>
 
     </div>
 
     <script>
-        const toggleButton = document.getElementById('theme-toggle');
-        const body = document.body;
-        const icon = toggleButton.querySelector('i');
-
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            
-            if (body.classList.contains('light-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
             }
-        });
+        }
+        window.addEventListener("scroll", reveal);
+        // Ativar animação ao carregar
+        reveal();
     </script>
 
 </body>
