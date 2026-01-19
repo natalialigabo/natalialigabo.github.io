@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natalia Ligabo | Portfolio</title>
+    <title>Natalia Ligabo dos Santos| Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CONFIGURAÇÕES GERAIS --- */
+        /* --- CONFIGURAÇÕES GERAIS & TEMAS --- */
         :root {
             --bg-color: #0f1115;
             --text-main: #ffffff;
             --text-muted: #9ca3af;
-            --accent: #d4b2d8;
+            --accent: #d4b2d8; /* Lilás suave */
             --card-bg: #161b22;
             --border: #333;
+        }
+
+        body.light-mode {
+            --bg-color: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --accent: #9333ea; /* Roxo mais forte */
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,10 +35,28 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             padding: 0 20px;
-            overflow-x: hidden; /* Evita rolagem lateral nas animações */
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; }
+        .container { max-width: 1100px; margin: 0 auto; position: relative; }
+
+        /* --- BOTÃO DE TEMA --- */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
         /* --- ANIMAÇÃO DE SCROLL (REVEAL) --- */
         .reveal {
@@ -37,18 +64,16 @@
             transform: translateY(50px);
             transition: all 0.8s ease-out;
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- HEADER & HERO --- */
         header {
-            min-height: 90vh; /* Ocupa a tela quase toda */
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding-bottom: 50px;
+            padding-top: 60px;
         }
 
         .hero-text h1 {
@@ -76,7 +101,7 @@
             box-shadow: 0 0 50px rgba(212, 178, 216, 0.1);
         }
 
-        /* --- SEÇÃO SOBRE MIM (COM EFEITO) --- */
+        /* --- SEÇÃO SOBRE MIM --- */
         .about-section {
             padding: 100px 0;
             border-top: 1px solid var(--border);
@@ -103,7 +128,7 @@
             color: var(--text-muted);
         }
 
-        /* --- GRID DE PROJETOS (ESTILO BLOG) --- */
+        /* --- GRID DE PROJETOS (INOVAÇÃO) --- */
         .section-header {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
@@ -118,7 +143,6 @@
             margin-bottom: 100px;
         }
 
-        /* Card Estilo Blog */
         .blog-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -126,20 +150,17 @@
             border: 1px solid var(--border);
             transition: transform 0.3s;
         }
-
         .blog-card:hover { transform: translateY(-10px); border-color: var(--accent); }
 
         .card-image {
             height: 200px;
-            background: #252a33;
+            background: rgba(212, 178, 216, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             color: var(--accent);
-            position: relative;
         }
-        /* Se você tiver prints, pode usar <img> aqui dentro depois */
 
         .card-content { padding: 30px; }
 
@@ -151,13 +172,12 @@
             margin-bottom: 10px;
             display: block;
         }
-
-        .card-title { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .card-title { font-size: 1.5rem; margin-bottom: 15px; }
         .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
 
         .btn-link {
             text-decoration: none;
-            color: #fff;
+            color: var(--text-main);
             font-weight: 600;
             border-bottom: 1px solid var(--accent);
             padding-bottom: 2px;
@@ -165,7 +185,7 @@
         }
         .btn-link:hover { color: var(--accent); }
 
-        /* --- LISTA OPEN SOURCE (MAIS COMPACTA) --- */
+        /* --- LISTA OPEN SOURCE (COMPACTA) --- */
         .opensource-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -173,27 +193,35 @@
         }
 
         .os-card {
-            background: rgba(255,255,255,0.03);
+            background: var(--card-bg);
             padding: 20px;
             border-radius: 8px;
             border: 1px solid var(--border);
+            transition: border-color 0.3s;
         }
-        .os-card h4 { color: #fff; margin-bottom: 5px; }
+        .os-card:hover { border-color: var(--accent); }
+        .os-card h4 { margin-bottom: 5px; }
         .os-card span { font-size: 0.8rem; color: var(--accent); }
 
         /* --- FOOTER --- */
         footer { padding: 50px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 80px; }
-        .social-links a { color: #fff; margin: 0 15px; font-size: 1.5rem; }
+        .social-links a { color: var(--text-main); margin: 0 15px; font-size: 1.5rem; transition: color 0.3s; }
+        .social-links a:hover { color: var(--accent); }
 
         @media (max-width: 768px) {
-            header { flex-direction: column-reverse; text-align: center; justify-content: center; }
+            header { flex-direction: column-reverse; text-align: center; justify-content: center; padding-top: 100px; }
             .hero-text h1 { font-size: 3rem; }
             .about-grid { grid-template-columns: 1fr; }
             .hero-image img { width: 250px; height: 250px; margin-bottom: 30px; }
+            .theme-toggle { top: 20px; right: 20px; }
         }
     </style>
 </head>
 <body>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Mudar Tema">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <div class="container">
         
@@ -201,30 +229,22 @@
             <div class="hero-text reveal">
                 <span class="subtitle">Biomedical Scientist & Dev</span>
                 <h1>Natalia Ligabo</h1>
-                <p style="font-size: 1.2rem; color: #9ca3af; max-width: 500px;">
-                    Unindo neurociência e código para construir o futuro da HealthTech.
+                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 500px;">
+                    Unindo neurociência e código para construir o futuro da HealthTech e segurança digital.
                 </p>
             </div>
             <div class="hero-image reveal">
-                <img src="avatar.jpg" alt="Natalia Ligabo">
+                <img src="avatar.pneg" alt="Natalia Ligabo">
             </div>
         </header>
 
         <section class="about-section reveal">
             <div class="about-grid">
-                <div class="about-title">
-                    About<br>My Journey
-                </div>
+                <div class="about-title">About<br>My Journey</div>
                 <div class="about-text">
-                    <p>
-                        Minha trajetória não é linear, e essa é minha maior força. Comecei nos laboratórios clínicos, analisando a vida através de microscópios e dados biológicos. Lá, entendi a importância da precisão e do impacto humano.
-                    </p>
-                    <p>
-                        Ao migrar para a <strong>Engenharia da Computação</strong>, percebi que poderia escalar esse impacto. Hoje, não analiso apenas um paciente por vez, mas crio algoritmos (HeartGuard, Artemis) capazes de monitorar milhares.
-                    </p>
-                    <p>
-                        Meu foco é claro: usar Inteligência Artificial não apenas como ferramenta, mas como uma extensão do cuidado médico e da segurança social.
-                    </p>
+                    <p>Minha trajetória não é linear, e essa é minha maior força. Comecei nos laboratórios clínicos, analisando a vida através de microscópios e dados biológicos. Lá, entendi a importância da precisão e do impacto humano.</p>
+                    <p>Ao migrar para a <strong>Engenharia da Computação</strong>, percebi que poderia escalar esse impacto. Hoje, não analiso apenas um paciente por vez, mas crio algoritmos (HeartGuard, EEG BCI) capazes de monitorar milhares.</p>
+                    <p>Meu foco é claro: usar Inteligência Artificial não apenas como ferramenta, mas como uma extensão do cuidado médico e da segurança social.</p>
                 </div>
             </div>
         </section>
@@ -238,6 +258,26 @@
                     <span class="card-meta">IoMT • Cardiology</span>
                     <h3 class="card-title">HeartGuard</h3>
                     <p class="card-desc">Sistema de monitoramento cardíaco via IoT com IA de 99% de acurácia na detecção de arritmias.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-brain"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Neuroscience • BCI</span>
+                    <h3 class="card-title">Motor Imagery EEG Classifier</h3>
+                    <p class="card-desc">Interface Cérebro-Computador que utiliza ML para classificar pensamentos de movimento via sinais de EEG.</p>
+                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-calendar-alt" style="color: #f472b6;"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Social Impact • Security</span>
+                    <h3 class="card-title">MyCalendar (SOS)</h3>
+                    <p class="card-desc">App camuflado de calendário menstrual que funciona como botão de pânico oculto para situações de violência.</p>
                     <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
@@ -263,65 +303,11 @@
             </div>
 
             <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-leaf"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">AgroTech • Sustainability</span>
-                    <h3 class="card-title">Projeto Amana</h3>
-                    <p class="card-desc">Monitoramento inteligente de recursos hídricos para agricultura sustentável.</p>
-                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="blog-card reveal">
                 <div class="card-image"><i class="fas fa-fingerprint"></i></div>
                 <div class="card-content">
                     <span class="card-meta">Forensics • AI Security</span>
                     <h3 class="card-title">Deepfake Hunter</h3>
                     <p class="card-desc">Algoritmo para identificar manipulação facial e micro-expressões em vídeos digitais.</p>
-                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-brain"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">EdTech • Knowledge</span>
-                    <h3 class="card-title">Projeto Athena</h3>
-                    <p class="card-desc">Sistema de gestão de conhecimento adaptativo focado em otimização de aprendizado.</p>
-                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-brain"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">Neuroscience • BCI (Brain-Computer Interface)</span>
-                    <h3 class="card-title">Motor Imagery EEG Classifier</h3>
-                    <p class="card-desc">
-                        Sistema de interpretação de sinais eletroencefalográficos (EEG). Utiliza Machine Learning para classificar padrões de "imaginação motora", permitindo comandos mentais para interfaces assistivas.
-                    </p>
-                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-file-medical-alt"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">Health Data Standards • IoT</span>
-                    <h3 class="card-title">HealthMetric Hub (FHIR)</h3>
-                    <p class="card-desc">
-                        Hub de interoperabilidade para dispositivos IoT médicos. Implementa o padrão internacional HL7 FHIR para garantir que dados de wearables sejam aceitos em sistemas hospitalares.
-                    </p>
-                    <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-calendar-alt" style="color: #f472b6;"></i></div> <div class="card-content">
-                    <span class="card-meta">Social Impact • Security</span>
-                    <h3 class="card-title">MyCalendar (SOS)</h3>
-                    <p class="card-desc">
-                        Aplicativo camuflado de calendário menstrual que funciona como botão de pânico oculto. Envia localização e áudio em tempo real para contatos de emergência em situações de violência doméstica.
-                    </p>
                     <a href="#" class="btn-link">Case Study <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
@@ -332,47 +318,46 @@
         <div class="opensource-list reveal">
             
             <div class="os-card">
+                <h4>HealthMetric Hub (FHIR)</h4>
+                <span>Health Data • IoT</span>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Hub de interoperabilidade padrão HL7 FHIR para dados médicos.</p>
+            </div>
+
+            <div class="os-card">
                 <h4>TechBank</h4>
                 <span>Java • Spring Boot</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Backend bancário robusto com auth.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Backend bancário robusto com auth.</p>
+            </div>
+            
+            <div class="os-card">
+                <h4>Auction House System</h4>
+                <span>Java • WebSockets</span>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Backend de leilões em tempo real.</p>
+            </div>
+
+            <div class="os-card">
+                <h4>NLP Spam Classifier</h4>
+                <span>ML • NLP</span>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Filtro de spam com IA.</p>
             </div>
 
             <div class="os-card">
                 <h4>Alchemist's Duel</h4>
                 <span>Python • Game Dev</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Jogo de estratégia e lógica de elementos.</p>
-            </div>
-
-            <div class="os-card">
-                <h4>EcoShield</h4>
-                <span>GeoSpatial • APIs</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Alertas de desastres climáticos.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Jogo de estratégia e lógica.</p>
             </div>
 
             <div class="os-card">
                 <h4>Adaptive Chess</h4>
-                <span>Algorithms • Minimax</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Engine de xadrez que aprende com você.</p>
+                <span>Algorithms • AI</span>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Engine que aprende com você.</p>
             </div>
 
             <div class="os-card">
                 <h4>Pentest Lab</h4>
                 <span>Kali Linux • Security</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Ambiente para Ethical Hacking.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Ambiente para Ethical Hacking.</p>
             </div>
-
-            <div class="os-card">
-                <h4>My Calendar</h4>
-                <span>Web • Productivity</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Gestão de tempo inteligente.</p>
-            </div>
-
-            <div class="os-card">
-                <h4>Sentinela</h4>
-                <span>Monitoring • Python</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">Script de vigilância de processos.</p>
-            </div>
-
         </div>
 
         <footer>
@@ -383,55 +368,40 @@
             </div>
             <p style="margin-top: 20px;">© 2026 Natalia Ligabo.</p>
         </footer>
-        <div class="os-card">
-                <h4>Auction House System</h4>
-                <span>Java • WebSockets</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
-                    Backend de alta performance para leilões em tempo real, suportando milhares de lances simultâneos via WebSocket.
-                </p>
-            </div>
-
-            <div class="os-card">
-                <h4>NLP Spam Classifier</h4>
-                <span>Machine Learning • NLP</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
-                    Modelo de Inteligência Artificial treinado para filtrar e classificar e-mails como spam com alta precisão.
-                </p>
-            </div>
-
-            <div class="os-card">
-                <h4>Conecta Idoso</h4>
-                <span>Social • Accessibility</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
-                    Plataforma web com UX/UI adaptada para inclusão digital e social da terceira idade.
-                </p>
-            </div>
-
-            <div class="os-card">
-                <h4>Mood Music API</h4>
-                <span>API Rest • Backend</span>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">
-                    API que recomenda playlists baseadas na análise de sentimento do usuário ou contexto atual.
-                </p>
-            </div>
 
     </div>
 
     <script>
+        // TEMA DARK/LIGHT
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = toggleButton.querySelector('i');
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // ANIMAÇÃO DE SCROLL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
+                var elementVisible = 100;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
         window.addEventListener("scroll", reveal);
-        // Ativar animação ao carregar
-        reveal();
+        reveal(); // Ativar ao carregar
     </script>
 
 </body>
