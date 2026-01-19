@@ -72,6 +72,50 @@
             transition: all 0.3s ease;
         }
         .theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: rotate(15deg); }
+        /* --- SELETOR DE IDIOMA (CÁPSULA CLÁSSICA) --- */
+        .lang-switch-container {
+            position: fixed;
+            top: 25px;
+            right: 85px; /* Fica à esquerda do botão de tema */
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 8px 15px;
+            border-radius: 30px; /* Formato de cápsula elegante */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            padding: 2px;
+        }
+        
+        .lang-btn:hover { color: var(--text-main); }
+
+        /* Estilo do idioma selecionado */
+        .lang-btn.active-lang {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .lang-divider { color: var(--border); font-size: 0.8rem; }
+
+        /* Ajuste para Mobile para não ficar em cima do outro botão */
+        @media (max-width: 768px) {
+            .lang-switch-container { top: 80px; right: 25px; }
+        }
 
         /* --- ANIMAÇÃO REVEAL --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
@@ -194,6 +238,71 @@
         }
     </style>
 </head>
+    <div class="lang-switch-container">
+    <button class="lang-btn active-lang" data-lang="pt">PT</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+</div>
+    <script>
+    // --- SISTEMA DE TRADUÇÃO (I18N) ---
+
+    // 1. O DICIONÁRIO (Aqui você coloca suas traduções)
+    const translations = {
+        pt: {
+            // Chave : "Texto em Português"
+            hero_role: "Biomédica & Engenheira de Software",
+            hero_desc: "Transformando problemas complexos em soluções digitais de alta performance — da Saúde à Logística Corporativa.",
+            about_menu: "Sobre Mim",
+            // ... adicione TODAS as outras chaves que você criou no Passo 3 aqui ...
+            btn_case: "Ver Case Study",
+            footer_text: "© 2026 Natalia Ligabo."
+        },
+        en: {
+             // Chave : "Texto em Inglês"
+            hero_role: "Biomedical Scientist & Software Engineer",
+            hero_desc: "Transforming complex problems into high-performance digital solutions — from Healthcare to Corporate Logistics.",
+            about_menu: "About Me",
+             // ... adicione as versões em INGLÊS das mesmas chaves aqui ...
+            btn_case: "View Case Study",
+            footer_text: "© 2026 Natalia Ligabo. Built with code."
+        }
+    };
+
+    // 2. A LÓGICA DE TROCA
+    const langButtons = document.querySelectorAll('.lang-btn');
+    let currentLang = localStorage.getItem('language') || 'pt'; // Pega do salvo ou usa PT padrão
+
+    // Função que aplica a tradução
+    function setLanguage(lang) {
+        // Troca os textos no HTML
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                element.innerHTML = translations[lang][key]; // Usa innerHTML para permitir tags como <br>
+            }
+        });
+
+        // Atualiza visual dos botões PT/EN
+        langButtons.forEach(btn => {
+            btn.classList.toggle('active-lang', btn.getAttribute('data-lang') === lang);
+        });
+
+        // Salva a preferência do usuário
+        localStorage.setItem('language', lang);
+        currentLang = lang;
+    }
+
+    // Evento de clique nos botões
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const chosenLang = btn.getAttribute('data-lang');
+            setLanguage(chosenLang);
+        });
+    });
+
+    // Aplica o idioma ao carregar a página
+    setLanguage(currentLang);
+</script>
 <body>
 
     <button class="theme-toggle" id="theme-toggle" aria-label="Mudar Tema">
@@ -204,8 +313,8 @@
         
         <header>
             <div class="hero-text reveal">
-                <span class="subtitle">Biomedical Scientist & Software Engineer</span>
-                <h1>Natalia Ligabo<br>dos Santos</h1>
+                <h1 class="hero-title">Natalia Ligabo<br>dos Santos</h1> 
+                <span class="subtitle" data-i18n="hero_role">Biomédica & Engenheira de Software</span>
                 <p class="hero-desc">
                     Transformando problemas complexos em soluções digitais de alta performance — da Saúde à Logística Corporativa.
                 </p>
