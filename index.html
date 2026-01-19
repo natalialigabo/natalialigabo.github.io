@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Natalia Ligabo</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Azul escuro sério */
+            --accent-color: #27ae60;  /* Verde (remete a Bio/Saúde) */
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; color: var(--text-color); }
+        header { background: var(--primary-color); color: #fff; padding: 2rem 0; text-align: center; }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { font-size: 1.2rem; opacity: 0.9; }
+        
+        .container { max-width: 900px; margin: auto; padding: 20px; }
+        
+        .section-title { border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-top: 40px; color: var(--primary-color); }
+        
+        .project-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .project-card:hover { transform: translateY(-5px); border-left: 5px solid var(--accent-color); }
+        
+        .tags span { background: #e0e0e0; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; }
+        
+        footer { text-align: center; padding: 20px; background: #333; color: white; margin-top: 50px; }
+        a { color: var(--accent-color); text-decoration: none; font-weight: bold; }
+        
+        .btn { display: inline-block; background: var(--accent-color); color: white; padding: 10px 20px; border-radius: 5px; margin-top: 10px; }
+        .btn:hover { background: #219150; color: white;}
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Natalia Ligabo</h1>
+            <p>Biomedicina & Engenharia da Computação</p>
+            <p><i>Desenvolvendo tecnologia para impacto social e saúde.</i></p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section id="sobre">
+            <h2 class="section-title">Sobre Mim</h2>
+            <p>
+                Olá! Sou formada em Biomedicina e atualmente graduanda em Engenharia da Computação. 
+                Meu foco é utilizar a tecnologia para resolver problemas reais na área da saúde e sociedade.
+                Tenho experiência em análise clínica e agora aplico esse rigor analítico no desenvolvimento de software e Inteligência Artificial.
+            </p>
+        </section>
+
+        <section id="projetos">
+            <h2 class="section-title">Projetos em Destaque</h2>
+
+            <div class="project-card">
+                <h3>🫀 HeartGuard (IoMT & AI)</h3>
+                <p>Sistema de Internet das Coisas Médicas para monitoramento cardíaco. Utiliza uma CNN (Rede Neural Convolucional) para analisar dados de ECG e detectar anomalias em tempo real.</p>
+                <div class="tags">
+                    <span>Python</span> <span>TensorFlow</span> <span>IoMT</span> <span>Saúde</span>
+                </div>
+                <a href="LINK_DO_GITHUB_AQUI" class="btn">Ver no GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <h3>🌍 EcoShield (Impacto Social)</h3>
+                <p>Plataforma focada na prevenção de desastres ambientais, integrando dados climáticos para alertar comunidades vulneráveis.</p>
+                <div class="tags">
+                    <span>Java</span> <span>Dados Geoespaciais</span> <span>Impacto Social</span>
+                </div>
+                <a href="LINK_DO_GITHUB_AQUI" class="btn">Ver no GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <h3>🔒 Laboratório de Pentest</h3>
+                <p>Ambiente controlado para simulação de vulnerabilidades web (DVWA) e práticas de Ethical Hacking, rodando em Kali Linux.</p>
+                <div class="tags">
+                    <span>Linux</span> <span>Apache</span> <span>Segurança</span>
+                </div>
+                <a href="LINK_DO_GITHUB_AQUI" class="btn">Ver Código</a>
+            </div>
+
+        </section>
+
+        <section id="contato">
+            <h2 class="section-title">Contato</h2>
+            <p>Estou aberta a colaborações em projetos de HealthTech e Computação Social.</p>
+            <ul>
+                <li><a href="https://github.com/natalialigabo">GitHub</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="mailto:seuemail@exemplo.com">Email</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Natalia Ligabo. Construído com código.</p>
+    </footer>
+
+</body>
+</html>
