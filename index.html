@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- 1. CONFIGURAÇÕES DARK MODE --- */
+        /* --- 1. CONFIGURAÇÕES VISUAIS (CSS) --- */
         :root {
             --bg-color: #0f1115;       
             --bg-gradient: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
@@ -107,8 +107,10 @@
         .about-text p { margin-bottom: 25px; font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; }
 
         /* --- GRIDS & CARDS --- */
-        .section-header { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-bottom: 100px; }
+        .section-header { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 50px; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; display: inline-block; }
+        .section-wrapper { text-align: center; margin-bottom: 80px; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-bottom: 60px; text-align: left; }
         
         .blog-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s; display: flex; flex-direction: column; }
         .blog-card:hover { transform: translateY(-10px); border-color: var(--accent); }
@@ -119,10 +121,11 @@
         .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
         .btn-link { margin-top: auto; text-decoration: none; color: var(--text-main); font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; width: fit-content; font-size: 0.9rem; }
 
-        .opensource-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .opensource-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: left; }
         .os-card { background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border); transition: all 0.3s; }
         .os-card:hover { border-color: var(--accent); background: var(--card-hover-bg); }
         .os-card span { font-size: 0.8rem; color: var(--accent); font-family: monospace; }
+        .os-card h4 { margin-bottom: 5px; }
 
         footer { padding: 50px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 80px; }
         .social-links a { color: var(--text-main); margin: 0 15px; font-size: 1.5rem; transition: color 0.3s; }
@@ -177,94 +180,114 @@
             </div>
         </section>
 
-        <h2 class="section-header reveal" data-i18n="section_innovation">Inovação & Sistemas Complexos</h2>
-        <div class="projects-grid">
-            
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-microchip"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">ERP • Gestão Inteligente</span>
-                    <h3 class="card-title">Athena OS</h3>
-                    <p class="card-desc" data-i18n="desc_athena">Sistema inteligente para controle financeiro e gestão estratégica de projetos.</p>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="https://athena-demo-bcnzhu9rtydgtw2zt9fhgk.streamlit.app/" target="_blank" class="btn-link" data-i18n="btn_demo">Ver Live Demo</a>
-                        <a href="#" class="btn-link" data-i18n="btn_case">Case Study</a>
+        <div class="section-wrapper">
+            <h2 class="section-header reveal" data-i18n="section_data">Ciência de Dados & IA</h2>
+            <div class="projects-grid">
+                
+                <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-heartbeat"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">IoMT • Computer Vision</span>
+                        <h3 class="card-title">HeartGuard</h3>
+                        <p class="card-desc" data-i18n="desc_heartguard">Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia.</p>
+                        <a href="projects/heartguard-iomt/index.html" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
                     </div>
                 </div>
-            </div>
 
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-heartbeat"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">IoMT • HealthTech</span>
-                    <h3 class="card-title">HeartGuard</h3>
-                    <p class="card-desc" data-i18n="desc_heartguard">Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia.</p>
-                    <a href="projects/heartguard-iomt/index.html" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-map-marked-alt"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">Data Science • GeoSpatial</span>
+                        <h3 class="card-title">GeoAnalytics SUS</h3>
+                        <p class="card-desc" data-i18n="desc_geo">Mapeamento de cobertura de saúde cruzando bases do DATASUS e IBGE.</p>
+                        <a href="visualizations/mapa_cobertura_saude.html" target="_blank" class="btn-link" data-i18n="btn_viz">Ver Mapa Interativo</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-map-marked-alt"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">Data Science • GeoSpatial</span>
-                    <h3 class="card-title">GeoAnalytics SUS</h3>
-                    <p class="card-desc" data-i18n="desc_geo">Mapeamento de cobertura de saúde cruzando bases do DATASUS e IBGE.</p>
-                    <a href="visualizations/mapa_cobertura_saude.html" target="_blank" class="btn-link" data-i18n="btn_viz">Ver Mapa Interativo</a>
+                <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-brain"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">Neurociência • BCI</span>
+                        <h3 class="card-title">Classificador EEG</h3>
+                        <p class="card-desc" data-i18n="desc_eeg">Interface Cérebro-Computador via Machine Learning.</p>
+                        <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-route"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">Logística • B2B</span>
-                    <h3 class="card-title">Projeto Hera</h3>
-                    <p class="card-desc" data-i18n="desc_hera">Plataforma de inteligência logística e prospecção.</p>
-                    <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-fingerprint"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">Cibersegurança • IA</span>
+                        <h3 class="card-title">Deepfake Hunter</h3>
+                        <p class="card-desc" data-i18n="desc_deepfake">Algoritmo forense para detecção de vídeos manipulados.</p>
+                        <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-leaf"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">AgroTech • IoT</span>
-                    <h3 class="card-title">Projeto Amana</h3>
-                    <p class="card-desc" data-i18n="desc_amana">Monitoramento climático de precisão.</p>
-                    <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                 <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-leaf"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">AgroTech • Análise Preditiva</span>
+                        <h3 class="card-title">Projeto Amana</h3>
+                        <p class="card-desc" data-i18n="desc_amana">Modelagem climática para previsão de safras resilientes.</p>
+                        <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-brain"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">Neurociência • BCI</span>
-                    <h3 class="card-title">Classificador EEG</h3>
-                    <p class="card-desc" data-i18n="desc_eeg">Interface Cérebro-Computador via Machine Learning.</p>
-                    <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
-                </div>
             </div>
-
-            <div class="blog-card reveal">
-                <div class="card-image"><i class="fas fa-fingerprint"></i></div>
-                <div class="card-content">
-                    <span class="card-meta">Cibersegurança • IA</span>
-                    <h3 class="card-title">Deepfake Hunter</h3>
-                    <p class="card-desc" data-i18n="desc_deepfake">Algoritmo forense para detecção de vídeos manipulados.</p>
-                    <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
-                </div>
-            </div>
-
         </div>
 
-        <h2 class="section-header reveal" data-i18n="section_labs">Laboratório de Engenharia</h2>
-        <div class="opensource-list reveal">
-            <div class="os-card"><h4>TechBank</h4><span>Java • Spring Boot</span><p>Backend bancário robusto.</p></div>
-            <div class="os-card"><h4>Auction House</h4><span>WebSockets • Java</span><p>Leilões em tempo real.</p></div>
-            <div class="os-card"><h4>Alchemist's Duel</h4><span>Game Dev • Python</span><p>Jogo de estratégia.</p></div>
-            <div class="os-card"><h4>Adaptive Chess AI</h4><span>Algoritmos • IA</span><p>Engine de xadrez.</p></div>
-            <div class="os-card"><h4>HealthMetric Hub</h4><span>FHIR • Padrões</span><p>Interoperabilidade hospitalar.</p></div>
-            <div class="os-card"><h4>NLP Spam Classifier</h4><span>Machine Learning</span><p>Filtro inteligente.</p></div>
-            <div class="os-card"><h4>Pentest Lab</h4><span>Kali Linux • Security</span><p>Ambiente de invasão.</p></div>
-            <div class="os-card"><h4>Conecta Idoso</h4><span>Web • Acessibilidade</span><p>Inclusão digital.</p></div>
+        <div class="section-wrapper">
+            <h2 class="section-header reveal" data-i18n="section_soft">Engenharia de Software</h2>
+            <div class="projects-grid">
+                
+                <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-microchip"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">SaaS • Gestão Inteligente</span>
+                        <h3 class="card-title">Athena OS</h3>
+                        <p class="card-desc" data-i18n="desc_athena">Sistema inteligente para controle financeiro e gestão estratégica de projetos.</p>
+                        <div style="display: flex; gap: 15px;">
+                            <a href="https://athena-demo-bcnzhu9rtydgtw2zt9fhgk.streamlit.app/" target="_blank" class="btn-link" data-i18n="btn_demo">Ver Live Demo</a>
+                            <a href="#" class="btn-link" data-i18n="btn_case">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-route"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">Logística • B2B System</span>
+                        <h3 class="card-title">Projeto Hera</h3>
+                        <p class="card-desc" data-i18n="desc_hera">Plataforma SaaS de inteligência logística e prospecção comercial.</p>
+                        <a href="#" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                    </div>
+                </div>
+
+                <div class="blog-card reveal">
+                    <div class="card-image"><i class="fas fa-university"></i></div>
+                    <div class="card-content">
+                        <span class="card-meta">Backend • Arquitetura</span>
+                        <h3 class="card-title">TechBank Core</h3>
+                        <p class="card-desc" data-i18n="desc_techbank">API Bancária robusta com Java Spring Boot, Docker e mensageria.</p>
+                        <a href="https://github.com/natalialigabo/techbank" target="_blank" class="btn-link" data-i18n="btn_repo">Ver Repositório</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-wrapper">
+            <h2 class="section-header reveal" data-i18n="section_labs">Laboratório de Engenharia</h2>
+            <div class="opensource-list reveal">
+                <div class="os-card"><h4>Auction House</h4><span>WebSockets • Java</span><p>Leilões em tempo real.</p></div>
+                <div class="os-card"><h4>Alchemist's Duel</h4><span>Game Dev • Python</span><p>Jogo de estratégia.</p></div>
+                <div class="os-card"><h4>Adaptive Chess AI</h4><span>Algoritmos • IA</span><p>Engine de xadrez.</p></div>
+                <div class="os-card"><h4>HealthMetric Hub</h4><span>FHIR • Padrões</span><p>Interoperabilidade hospitalar.</p></div>
+                <div class="os-card"><h4>NLP Spam Classifier</h4><span>Machine Learning</span><p>Filtro inteligente.</p></div>
+                <div class="os-card"><h4>Pentest Lab</h4><span>Kali Linux • Security</span><p>Ambiente de invasão.</p></div>
+                <div class="os-card"><h4>Conecta Idoso</h4><span>Web • Acessibilidade</span><p>Inclusão digital.</p></div>
+            </div>
         </div>
 
         <footer>
@@ -286,18 +309,25 @@
                 about_p1: "<strong>\"De Biomédica a Dev?\"</strong> Sim, é uma mistura exótica. 🧬💻",
                 about_p2: "Troquei o microscópio pelo VS Code quando percebi que a programação me permitia \"diagnosticar\" e resolver problemas numa escala muito maior.",
                 about_p3: "Hoje, uso minha bagagem analítica para escrever códigos limpos e criar arquiteturas robustas. Seja detectando arritmias com IA ou otimizando a logística de empresas.",
-                section_innovation: "Inovação & Sistemas Complexos",
-                section_labs: "Laboratório de Engenharia",
+                
+                // TITULOS NOVOS
+                section_data: "Ciência de Dados & Inteligência Artificial",
+                section_soft: "Engenharia de Software & Sistemas",
+                section_labs: "Laboratório (Open Source)",
+
                 btn_case: "Ver Case Study",
                 btn_demo: "Ver Live Demo",
                 btn_viz: "Ver Mapa Interativo",
+                btn_repo: "Ver Repositório",
+
                 desc_athena: "Sistema inteligente para controle financeiro e gestão estratégica de projetos.",
                 desc_heartguard: "Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia.",
                 desc_geo: "Mapeamento de cobertura de saúde cruzando bases do DATASUS e IBGE.",
-                desc_hera: "Plataforma de inteligência logística e prospecção.",
-                desc_amana: "Monitoramento climático de precisão.",
+                desc_hera: "Plataforma SaaS de inteligência logística e prospecção comercial.",
+                desc_amana: "Modelagem climática para previsão de safras resilientes.",
                 desc_eeg: "Interface Cérebro-Computador via Machine Learning.",
                 desc_deepfake: "Algoritmo forense para detecção de vídeos manipulados.",
+                desc_techbank: "API Bancária robusta com Java Spring Boot, Docker e mensageria.",
                 footer_text: "© 2026 Natalia Ligabo."
             },
             en: {
@@ -307,18 +337,25 @@
                 about_p1: "<strong>\"From Scientist to Dev?\"</strong> Yes, it's an exotic mix. 🧬💻",
                 about_p2: "I traded the microscope for VS Code when I realized that programming allowed me to \"diagnose\" and solve problems on a much larger scale.",
                 about_p3: "Today, I use my analytical background to write clean code and build robust architectures.",
-                section_innovation: "Innovation & Complex Systems",
-                section_labs: "Engineering Labs",
+                
+                // NEW TITLES
+                section_data: "Data Science & Artificial Intelligence",
+                section_soft: "Software Engineering & Systems",
+                section_labs: "Engineering Labs (Open Source)",
+
                 btn_case: "View Case Study",
                 btn_demo: "Live Demo",
                 btn_viz: "View Interactive Map",
+                btn_repo: "View Repository",
+
                 desc_athena: "Intelligent ERP for financial control and strategic project management.",
                 desc_heartguard: "IoT cardiac monitoring with 99% accuracy AI (CNN).",
                 desc_geo: "Healthcare coverage mapping crossing DATASUS and IBGE databases.",
-                desc_hera: "Logistics intelligence platform.",
-                desc_amana: "Precision climate monitoring.",
+                desc_hera: "Logistics intelligence SaaS platform.",
+                desc_amana: "Climate modeling for resilient crop prediction.",
                 desc_eeg: "Brain-Computer Interface via Machine Learning.",
                 desc_deepfake: "Forensic algorithm for deepfake detection.",
+                desc_techbank: "Robust Banking API with Java Spring Boot, Docker and messaging.",
                 footer_text: "© 2026 Natalia Ligabo."
             }
         };
