@@ -10,13 +10,13 @@
     <style>
         /* --- 1. CONFIGURAÇÕES DARK MODE --- */
         :root {
-            --bg-color: #0f1115;      
+            --bg-color: #0f1115;       
             --bg-gradient: radial-gradient(circle at 50% 0%, #2a2e38 0%, #0f1115 80%);
-            --text-main: #ffffff;     
-            --text-muted: #9ca3af;    
+            --text-main: #ffffff;      
+            --text-muted: #9ca3af;     
             --accent: #d4b2d8;        
             --card-bg: #161b22;       
-            --border: #333;           
+            --border: #333;            
             --card-hover-bg: #1c2128;
             --shadow: none;
             --wrapper-bg: #161b22; 
@@ -27,10 +27,10 @@
         [data-theme="light"] {
             --bg-color: #faf9f6;
             --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #faf9f6 100%);
-            --text-main: #111827;     
-            --text-muted: #4b5563;    
+            --text-main: #111827;      
+            --text-muted: #4b5563;     
             --accent: #7c3aed;        
-            --card-bg: #ffffff;       
+            --card-bg: #ffffff;        
             --border: #e5e7eb;        
             --card-hover-bg: #f9fafb;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -82,8 +82,8 @@
             background-color: var(--wrapper-bg);
             border: 1px solid var(--wrapper-border);
             border-radius: 24px;
-            padding: 60px 50px;       
-            margin-top: 40px;    
+            padding: 60px 50px;        
+            margin-top: 40px;     
             margin-bottom: 60px; 
             box-shadow: var(--wrapper-shadow);
             transition: all 0.3s ease;
@@ -199,7 +199,17 @@
                     <span class="card-meta">IoMT • HealthTech</span>
                     <h3 class="card-title">HeartGuard</h3>
                     <p class="card-desc" data-i18n="desc_heartguard">Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia.</p>
-                    <a href="heartguard.html" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                    <a href="projects/heartguard-iomt/index.html" class="btn-link" data-i18n="btn_case">Ver Case Study</a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="card-image"><i class="fas fa-map-marked-alt"></i></div>
+                <div class="card-content">
+                    <span class="card-meta">Data Science • GeoSpatial</span>
+                    <h3 class="card-title">GeoAnalytics SUS</h3>
+                    <p class="card-desc" data-i18n="desc_geo">Mapeamento de cobertura de saúde cruzando bases do DATASUS e IBGE.</p>
+                    <a href="visualizations/mapa_cobertura_saude.html" target="_blank" class="btn-link" data-i18n="btn_viz">Ver Mapa Interativo</a>
                 </div>
             </div>
 
@@ -280,8 +290,10 @@
                 section_labs: "Laboratório de Engenharia",
                 btn_case: "Ver Case Study",
                 btn_demo: "Ver Live Demo",
+                btn_viz: "Ver Mapa Interativo",
                 desc_athena: "Sistema inteligente para controle financeiro e gestão estratégica de projetos.",
                 desc_heartguard: "Monitoramento cardíaco via IoT com IA (CNN) de 99% de acurácia.",
+                desc_geo: "Mapeamento de cobertura de saúde cruzando bases do DATASUS e IBGE.",
                 desc_hera: "Plataforma de inteligência logística e prospecção.",
                 desc_amana: "Monitoramento climático de precisão.",
                 desc_eeg: "Interface Cérebro-Computador via Machine Learning.",
@@ -299,8 +311,10 @@
                 section_labs: "Engineering Labs",
                 btn_case: "View Case Study",
                 btn_demo: "Live Demo",
+                btn_viz: "View Interactive Map",
                 desc_athena: "Intelligent ERP for financial control and strategic project management.",
                 desc_heartguard: "IoT cardiac monitoring with 99% accuracy AI (CNN).",
+                desc_geo: "Healthcare coverage mapping crossing DATASUS and IBGE databases.",
                 desc_hera: "Logistics intelligence platform.",
                 desc_amana: "Precision climate monitoring.",
                 desc_eeg: "Brain-Computer Interface via Machine Learning.",
